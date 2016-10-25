@@ -1,0 +1,161 @@
+<html>
+<head>
+	<title>Project 1 Description</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<div class="headerContainer">
+	<h1>
+		Project 1 Description
+	</h1>
+	<h3>
+		James Jelin and Tucker Gordon
+	</h3>
+	<h3>
+		Bowdoin College, 24 October 2016
+	</h3>
+</div>
+<div class="thinBar"></div>
+<div class="textBox">
+	<h3>
+		The Dataset: 
+	</h3>
+	<p>
+		Link: <a href="http://archive.ics.uci.edu/ml/datasets/STUDENT+ALCOHOL+CONSUMPTION">
+				http://archive.ics.uci.edu/ml/datasets/STUDENT+ALCOHOL+CONSUMPTION
+				</a>
+		<br><br>
+		Our dataset is the Student Alcohol Consumption dataset from UCI. There are actually two datasets here: one for a math class and one for a Portuguese language class. We are using the Portuguese language class dataset because it is much bigger than the other. This dataset has 648 examples and 33 attributes. Of these, 13 are binary, 14 are numeric, and 6 are categorical.
+		<br><br>
+		The attributes that we will be working with are:
+		<ol>
+			<li>age - student's age (numeric): 15-22</li>
+			<li>Sex - student's sex (binary): 'F' - female or 'M' - male</li>
+			<li>famsize - family size (binary): 'LE3' - <= 3 or 'GT3' > 3</li>
+			<li>Pstatus - parent's cohabitation status (binary): 'T' - together or 'A' - apart</li>
+			<li>guardian - student's primary guardian (categorical): 'mother' or 'father' or 'other'</li>
+			<li>activities - extra-curricular activities (binary): 'yes' or 'no'</li>
+			<li>Dalc - workday alcohol consumption (numeric): 1 - very low to 5 - very high</li>
+			<li>Walc - weekend alcohol consumption (numeric): 1 - very low to 5 - very high</li>
+		</ol>
+		<br>
+		So our data looks like this:<br><br>
+		<table border="1">
+		<tr>
+			<td>sex</td>
+			<td>age</td>
+			<td> famsize </td>
+			<td>Pstatus</td>
+			<td>guardian</td>
+			<td> activities </td>
+			<td>Dalc</td>
+			<td>Walc</td>
+		</tr>
+		<tr>
+			<td>F</td>
+			<td>18</td>
+			<td> GT3 </td>
+			<td>A</td>
+			<td>mother</td>
+			<td> no </td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>F</td>
+			<td>17</td>
+			<td> GT3 </td>
+			<td>T</td>
+			<td>father</td>
+			<td> no </td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		<tr>
+			<td>F</td>
+			<td>15</td>
+			<td> LE3 </td>
+			<td>T</td>
+			<td>mother</td>
+			<td> no </td>
+			<td>2</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>F</td>
+			<td>15</td>
+			<td> GT3 </td>
+			<td>T</td>
+			<td>mother</td>
+			<td> yes </td>
+			<td>1</td>
+			<td>1</td>
+		</tr>
+		</table>
+	</p>
+	<h3>Questions We Can Answer Through Our Interactions</h3>
+	<ol>
+		<li>At what ages do students drink more?</li>
+		<li>Do students whose parents are divorced drink more than students with married parents?</li>
+		<li>Do students with a male single parent drink more than those with a female single parent (or vice-versa)?</li>
+		<li>For each of the above questions, how do these drinking amounts change during the week vs. the weekend?</li>
+		<li>How much does a particular group of students drink, based on the following criteria: sex, age, family size, and extra-curricular involvement (i.e. male, 17, 6 person family, does extracurriculars)?</li>
+	</ol>
+	<h3>Initial Interface:</h3>
+	<img src="sketches/bar_init.jpg" style = "width: 1000">
+	<p>
+    The first implementation will be a stacked bar chart that examines how age and a student's family life affects their alcohol consumption. The bar chart will be divided into different ages. Each age will have three color-coded bars--one for students whose parents are together, one for students whose parents are separated and live with their father, and one for students with separated parents who live with their mother. Each bar will have two stacked parts: the amount of drinking during the workweek, and the amount during the weekend. We will keep the scale from 1-5 by dividing the sum of week and weekend drinking (which will be between 2 and 10) by 2.
+	</p>
+	<p>
+    There will be two ways to interact with the chart. If you click an age, then all the other ages will disappear so you can just look at that one. If you click on a bar, then all the bars that aren't that parenting situation will disappear, so you can just see how students with that family situation consume alcohol.
+	</p>
+	<img src="sketches/tree_init.jpg" style = "width: 500">
+	<p>
+    The second implementation will use a collapsable tree layout (<a href="http://mbostock.github.io/d3/talk/20111018/tree.html">http://mbostock.github.io/d3/talk/20111018/tree.html</a>). The concept here is that you can choose a series of attributes, and then see the average amount of alcohol consumption for someone with those attributes. The user will be prompted to choose either a male or female sex. Then, they will choose an age (15-22), whether or not the family has more than three members, and whether or not the student participates in extracurricular activities. The tree will then display the average amount that a student, based on these attributes, drinks during the week and during the weekend.
+	</p>
+
+	<h3>Using the Interactions:</h3>
+	<h4>The Stacked Bar Chart:</h4>
+	<p>
+	Let's say that I want to focus on the youngest drinkers. I click on the number 15, and voila: I now only see bars that pertain to 15 year olds, and they have scaled to fit the screen. I see three bars: one for students whose parents are together, one for students whose parents are separated and who are living with their mothers, and one for students whose parents are separated and who are living with their fathers. Each of these bars also has two parts: the bottom is the workweek drinking, and the top is the weekend drinking.
+	</p>
+	<p>
+	Additionally, let's say that I want to only look at students whose parents are together. I click on any bar that is colored blue, and now all the non-blue bars go away, and the blue bars scale and get bigger. It would look like this:
+	</p>
+	<img src="sketches/bar_clicked.jpg" style = "width: 1000">
+	<p>
+	This allows me to see students (still divided by age group) whose parents are together.
+	</p>
+
+	<h4>The Collapsable Tree:</h4>
+	<p>
+	First, you select a sex by clicking male or female. Then you pick an age by clicking 15, 16, 17, 18, 19, 20, 21, or 22. Then, you select a family size (more or less than 3), and finally you select 'does extracurriculars' or 'does not do extracurriculars'. As you click one of these, the options for the next one are revealed. At the end, text will appear that lists the avg. workday and weekend alcohol consumption for students in that particular grouping. You can select other attributes, too, in order to see more groupings, and deselect attributes at any time.
+	</p>
+	<h4>D3 Layouts:</h4>
+	<ol>
+		<li>Stacked Bar Chart (<a href="https://bl.ocks.org/mbostock/1134768">example</a>)</li>
+		<li>Collapable Tree Layout (<a href="http://mbostock.github.io/d3/talk/20111018/tree.html">example</a>)</li>
+	</ol>
+	<h3>New Concepts</h3>
+	<ol>
+		<li>Stacking bars</li>
+		<li>Collapsable tree layout</li>
+		<li>Setting up a class of multiple, specific objects that disappear when something is clicked</li>
+		<li>Clicking on something in the axis titles</li>
+		<li>Using a legend</li>
+		<li>Reading in a .csv file</li>
+	</ol>
+	<h3>Intended Implmentation Path:</h3>
+	<ol>
+		<li>Clean dataset (i.e. eliminate unecessary columns) and get it read into a JS script)</li>
+		<li>Make the collapsable tree layout and get it pretty much working</li>
+		<li>Make a static, stacked bar chart of our data</li>
+		<li>Implment functionality for clicking a bar and making all but that type of bar disappear</li>
+		<li>Implement functionality for clicking age group on axis and only seeing those bars</li>
+		<li>Add legend to bar chart</li>
+		<li>Finalize and make visualizations look prettier</li>
+		<li>Make sure code is very clear and legible</li>
+	</ol>
+</div>
+</body>
+</html>

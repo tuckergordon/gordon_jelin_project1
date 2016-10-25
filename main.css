@@ -1,0 +1,38 @@
+.thinBar {
+	display: block;
+    background: lightslategray;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFF;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 2px;
+    font-size: 10%;
+}
+
+h1, h2, h3 {
+    color: darkslategray;
+}
+
+.headerContainer {
+    text-align: center;
+}
+
+#assignments {
+    width: 50%;
+    float: left;
+}
+
+/*#exercises {
+    width: 50%
+    float: right;
+}*/
+
+body {
+    text-align: left;
+    font-family: sans-serif;
+}
+
+li {
+    margin-bottom: 8px;
+}
