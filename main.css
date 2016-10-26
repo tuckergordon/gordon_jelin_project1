@@ -1,3 +1,24 @@
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.axisTitle {
+	font-size: 15px;
+}
+
 .thinBar {
 	display: block;
     background: lightslategray;
@@ -6,33 +27,16 @@
     border-color: #FFF;
     margin-left: 0px;
     margin-right: 0px;
+    margin-bottom: 10px;
     padding: 2px;
     font-size: 10%;
 }
 
-h1, h2, h3 {
-    color: darkslategray;
-}
-
-.headerContainer {
-    text-align: center;
-}
-
-#assignments {
-    width: 50%;
-    float: left;
-}
-
-/*#exercises {
-    width: 50%
-    float: right;
-}*/
-
 body {
-    text-align: left;
-    font-family: sans-serif;
+	text-align: center;
 }
 
-li {
-    margin-bottom: 8px;
+h1, h3 {
+	color: darkslategray;
+	font-family: sans-serif;
 }
