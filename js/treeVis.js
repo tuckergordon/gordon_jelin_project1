@@ -116,6 +116,8 @@ function getAvgWalcForStudent(sex, age, famsize, activities) {
 	// return avgWalc;
 }
 
+//setTimeout(alert("Ready"), 100000);
+
 //var treeData = generateTreeJSON();
 
 //console.log(JSON.stringify(treeData));
@@ -126,20 +128,6 @@ var margins = [20, 120, 20, 120],
 	duration = 750,
 	i = 0,
 	root;
-
-//var treeData = getTreeData();
-
-// $(document).ready(function() {
-// 	$.getJSON("treeData.json", function(data) {
-// 		treeData = data;
-// 		alert("here");
-// 		//alert(JSON.property);
-// 	});
-// 	 // .success(function() { alert("second success"); })
-// 	 // .error(function() { alert("error"); })
-// 	 // .complete(function() { alert("complete"); });
-// });
-
 
 var tree = d3.layout.tree()
 					.size([height, width]);
