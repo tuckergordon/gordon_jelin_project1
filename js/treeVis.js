@@ -12,6 +12,74 @@ d3.csv("students.csv", function(error, data) {
     }
 });
 
+function generateTreeJSON() {
+	var treeJSON = [];
+
+	var sexes = ["Male", "Female"],
+		ages = ["15", "16", "17", "18", "19", "20", "21", "22"],
+		familySizes = ["Family size > 3", "Family size <= 3"],
+		extraCurrs = ["Extracurriculars", "No extracurriculars"];
+
+	var start = {};
+	start["name"] = "Start";
+	start["parent"] = "null";
+
+	var startChildren = [];
+
+	for (var i = 0; i < sexes.length; i++) {
+		var sex = {};
+		sex["name"] = sexes[i];
+		sex["parent"] = "Start";
+
+		var sexChildren = [];
+
+		for (var j = 0; j < ages.length; j++) {
+			var age = {};
+			age["name"] = ages[j];
+			age["parent"] = sexes[i];
+
+			var ageChildren = [];
+
+			for (var k = 0; k < familySizes.length; k++) {
+				var familySize = {};
+				familySize["name"] = familySizes[k];
+				familySize["parent"] = ages[j];
+
+				var familySizeChildren = [];
+
+				for (var l = 0; l < extraCurrs.length; l++) {
+					var extraCurr = {};
+					extraCurr["name"] = extraCurrs[l];
+					extraCurr["parent"] = familySizes[k];
+
+					var extraCurrChildren = [];
+
+					//for loop for accessing dataset
+
+					extraCurr["children"] = extraCurrChildren;
+					familySizeChildren.push(extraCurr);
+				}
+
+				familySize["children"] = familySizeChildren;
+				ageChildren.push(familySize);
+			}
+
+			age["children"] = ageChildren;
+			sexChildren.push(age);
+		}
+
+		sex["children"] = sexChildren;
+		startChildren.push(sex);
+	}
+
+	start["children"] = startChildren;
+
+	treeJSON.push(start);
+	return treeJSON;
+}
+
+var treeData = generateTreeJSON();
+
 var margins = [20, 120, 20, 120],
 	width = 1280 - margins[1] - margins[3],
 	height = 800 - margins[0] - margins[2],
@@ -31,7 +99,6 @@ var margins = [20, 120, 20, 120],
 // 	 // .error(function() { alert("error"); })
 // 	 // .complete(function() { alert("complete"); });
 // });
-
 
 
 var tree = d3.layout.tree()
