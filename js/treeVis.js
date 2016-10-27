@@ -19,17 +19,18 @@ var margins = [20, 120, 20, 120],
 	i = 0,
 	root;
 
-var treeData;
+//var treeData = getTreeData();
 
-$(document).ready(function() {
-	$.getJSON('treeData.json', function(data) {
-		treeData = data;
-		alert(JSON.property);
-	});
-	 // .success(function() { alert("second success"); })
-	 // .error(function() { alert("error"); })
-	 // .complete(function() { alert("complete"); });
-});
+// $(document).ready(function() {
+// 	$.getJSON("treeData.json", function(data) {
+// 		treeData = data;
+// 		alert("here");
+// 		//alert(JSON.property);
+// 	});
+// 	 // .success(function() { alert("second success"); })
+// 	 // .error(function() { alert("error"); })
+// 	 // .complete(function() { alert("complete"); });
+// });
 
 
 
