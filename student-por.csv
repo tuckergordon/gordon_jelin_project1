@@ -1,0 +1,650 @@
+sex,age,famsize,Pstatus,guardian,activities,Dalc,Walc
+Female,18,Family size > 3,A,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,1
+Female,15,Family size <= 3,T,mother,No extracurriculars,2,3
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,father,No extracurriculars,1,2
+Male,16,Family size <= 3,T,mother,Extracurriculars,1,2
+Male,16,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,A,mother,No extracurriculars,1,1
+Male,15,Family size <= 3,A,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size <= 3,T,father,Extracurriculars,1,3
+Male,15,Family size > 3,T,mother,No extracurriculars,1,2
+Male,15,Family size > 3,A,other,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,2,4
+Male,16,Family size <= 3,T,father,Extracurriculars,1,3
+Male,15,Family size > 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,father,No extracurriculars,1,1
+Male,16,Family size <= 3,T,mother,Extracurriculars,1,3
+Male,16,Family size <= 3,T,mother,Extracurriculars,2,4
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,3
+Male,15,Family size > 3,T,mother,No extracurriculars,1,2
+Male,15,Family size > 3,T,mother,No extracurriculars,2,4
+Male,16,Family size <= 3,A,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,5,5
+Male,15,Family size > 3,T,mother,No extracurriculars,3,4
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,15,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,A,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,2
+Male,15,Family size <= 3,T,other,No extracurriculars,2,4
+Male,15,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size > 3,T,father,No extracurriculars,1,1
+Female,16,Family size <= 3,T,father,Extracurriculars,2,2
+Female,15,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,A,mother,No extracurriculars,1,4
+Male,16,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size > 3,T,mother,No extracurriculars,2,2
+Female,15,Family size > 3,T,father,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,No extracurriculars,2,3
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,15,Family size <= 3,A,father,No extracurriculars,3,4
+Female,15,Family size > 3,T,mother,No extracurriculars,2,3
+Female,15,Family size <= 3,A,mother,No extracurriculars,4,4
+Female,16,Family size > 3,A,mother,Extracurriculars,1,1
+Female,15,Family size > 3,A,mother,Extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size <= 3,T,father,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,2,3
+Female,16,Family size > 3,T,father,Extracurriculars,5,5
+Female,16,Family size <= 3,T,father,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,2,4
+Female,15,Family size <= 3,T,father,Extracurriculars,2,4
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,2
+Male,15,Family size > 3,A,mother,Extracurriculars,5,5
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,3
+Female,15,Family size <= 3,T,father,No extracurriculars,2,3
+Male,16,Family size > 3,T,father,No extracurriculars,1,1
+Male,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,2,4
+Male,16,Family size > 3,T,mother,Extracurriculars,2,2
+Female,16,Family size > 3,T,mother,Extracurriculars,2,4
+Male,15,Family size > 3,T,mother,Extracurriculars,2,3
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,3
+Male,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,15,Family size > 3,T,father,Extracurriculars,1,3
+Male,15,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,15,Family size <= 3,T,mother,Extracurriculars,1,3
+Female,15,Family size > 3,T,father,Extracurriculars,2,3
+Female,15,Family size > 3,T,father,No extracurriculars,2,3
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,2
+Female,15,Family size > 3,T,mother,Extracurriculars,1,3
+Male,16,Family size > 3,T,father,Extracurriculars,1,1
+Male,16,Family size <= 3,A,mother,No extracurriculars,3,5
+Female,16,Family size > 3,T,mother,No extracurriculars,1,3
+Female,15,Family size > 3,T,mother,Extracurriculars,1,3
+Female,16,Family size <= 3,T,father,No extracurriculars,2,3
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size <= 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,5,5
+Male,16,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,A,mother,Extracurriculars,1,1
+Female,15,Family size > 3,A,father,No extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Male,16,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size > 3,T,father,Extracurriculars,3,5
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,15,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,father,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,father,Extracurriculars,1,2
+Male,15,Family size > 3,T,father,Extracurriculars,1,1
+Male,16,Family size > 3,T,father,Extracurriculars,1,1
+Male,17,Family size > 3,T,father,Extracurriculars,1,4
+Male,15,Family size > 3,T,father,No extracurriculars,1,2
+Female,15,Family size > 3,T,mother,No extracurriculars,1,2
+Male,15,Family size > 3,T,father,Extracurriculars,1,2
+Female,16,Family size <= 3,T,father,Extracurriculars,1,2
+Male,16,Family size > 3,T,mother,Extracurriculars,1,4
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,father,No extracurriculars,3,2
+Female,15,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,19,Family size > 3,T,other,No extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,2,5
+Male,16,Family size > 3,T,mother,No extracurriculars,2,2
+Female,15,Family size > 3,T,father,No extracurriculars,2,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,3
+Female,17,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,15,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size <= 3,T,father,No extracurriculars,1,3
+Female,16,Family size > 3,A,father,No extracurriculars,1,4
+Male,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,A,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,No extracurriculars,2,4
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,Extracurriculars,4,5
+Female,18,Family size > 3,A,other,Extracurriculars,5,1
+Female,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,16,Family size > 3,A,other,Extracurriculars,1,1
+Male,16,Family size <= 3,T,mother,No extracurriculars,1,3
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,15,Family size > 3,T,father,No extracurriculars,1,1
+Female,15,Family size > 3,A,mother,No extracurriculars,2,3
+Male,16,Family size > 3,T,mother,Extracurriculars,1,3
+Male,16,Family size <= 3,T,father,Extracurriculars,2,2
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,No extracurriculars,3,3
+Male,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size > 3,T,father,No extracurriculars,1,2
+Female,15,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,father,No extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,15,Family size > 3,T,father,No extracurriculars,2,4
+Male,16,Family size > 3,T,mother,No extracurriculars,2,1
+Male,15,Family size <= 3,A,mother,No extracurriculars,2,5
+Male,18,Family size <= 3,T,mother,No extracurriculars,2,5
+Male,16,Family size <= 3,T,mother,Extracurriculars,3,5
+Female,15,Family size > 3,T,other,Extracurriculars,2,3
+Male,19,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,No extracurriculars,3,3
+Female,18,Family size > 3,T,mother,Extracurriculars,1,5
+Male,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,16,Family size > 3,T,father,No extracurriculars,4,4
+Male,16,Family size <= 3,T,mother,No extracurriculars,3,5
+Male,17,Family size <= 3,T,mother,Extracurriculars,2,2
+Male,17,Family size > 3,T,mother,No extracurriculars,1,4
+Male,15,Family size <= 3,T,mother,Extracurriculars,2,4
+Male,16,Family size > 3,T,father,No extracurriculars,1,4
+Male,17,Family size <= 3,T,mother,Extracurriculars,1,5
+Male,17,Family size > 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,father,No extracurriculars,2,4
+Female,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Male,16,Family size > 3,T,father,Extracurriculars,2,4
+Male,16,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,Extracurriculars,1,3
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,Extracurriculars,4,4
+Female,16,Family size > 3,T,mother,Extracurriculars,1,4
+Male,17,Family size > 3,T,father,Extracurriculars,1,4
+Male,16,Family size > 3,T,mother,Extracurriculars,3,4
+Male,17,Family size > 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,2,3
+Male,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,father,Extracurriculars,2,3
+Female,17,Family size <= 3,T,mother,Extracurriculars,2,3
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,17,Family size > 3,T,mother,Extracurriculars,2,3
+Male,16,Family size > 3,T,mother,Extracurriculars,1,2
+Male,16,Family size <= 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,A,mother,No extracurriculars,1,3
+Male,17,Family size > 3,T,mother,No extracurriculars,1,5
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,other,Extracurriculars,4,5
+Male,16,Family size > 3,T,mother,Extracurriculars,3,4
+Male,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,17,Family size <= 3,T,father,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,No extracurriculars,1,2
+Male,16,Family size <= 3,T,father,Extracurriculars,3,5
+Female,17,Family size > 3,T,mother,No extracurriculars,2,3
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,5
+Female,16,Family size > 3,T,mother,Extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,3,4
+Female,16,Family size > 3,A,mother,No extracurriculars,2,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,4
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,19,Family size > 3,T,other,Extracurriculars,1,2
+Male,17,Family size <= 3,T,mother,No extracurriculars,4,5
+Female,16,Family size > 3,A,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,2,4
+Female,17,Family size <= 3,T,mother,No extracurriculars,1,2
+Female,17,Family size <= 3,T,mother,No extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,2,4
+Male,18,Family size <= 3,T,father,No extracurriculars,2,4
+Female,17,Family size > 3,T,father,No extracurriculars,1,4
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,No extracurriculars,5,5
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Male,17,Family size <= 3,T,father,No extracurriculars,1,3
+Male,18,Family size <= 3,T,mother,Extracurriculars,4,5
+Female,17,Family size > 3,A,mother,Extracurriculars,1,2
+Female,17,Family size <= 3,T,father,Extracurriculars,1,2
+Male,17,Family size > 3,T,father,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,1,3
+Male,16,Family size > 3,T,father,Extracurriculars,2,4
+Male,16,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,1,3
+Male,17,Family size <= 3,T,father,Extracurriculars,5,5
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,A,mother,Extracurriculars,1,2
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,1
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,other,Extracurriculars,2,2
+Male,17,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,father,Extracurriculars,1,1
+Female,17,Family size <= 3,T,mother,Extracurriculars,1,2
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size <= 3,A,other,No extracurriculars,1,1
+Male,18,Family size > 3,T,father,No extracurriculars,3,5
+Female,17,Family size <= 3,A,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,mother,Extracurriculars,1,3
+Female,17,Family size <= 3,A,mother,Extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,Extracurriculars,1,4
+Male,17,Family size <= 3,A,mother,No extracurriculars,2,3
+Male,16,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,4
+Male,17,Family size > 3,T,father,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,2,3
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,other,No extracurriculars,1,1
+Male,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,2
+Male,17,Family size > 3,T,father,No extracurriculars,1,1
+Male,22,Family size > 3,T,mother,No extracurriculars,5,5
+Male,18,Family size <= 3,T,mother,No extracurriculars,1,3
+Male,16,Family size > 3,T,mother,No extracurriculars,2,4
+Male,18,Family size > 3,T,mother,No extracurriculars,2,4
+Male,16,Family size > 3,T,other,No extracurriculars,1,3
+Male,18,Family size > 3,T,mother,No extracurriculars,2,5
+Male,16,Family size > 3,T,mother,Extracurriculars,1,3
+Male,17,Family size > 3,T,mother,No extracurriculars,2,4
+Male,17,Family size <= 3,T,mother,Extracurriculars,1,2
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,3
+Female,17,Family size <= 3,T,mother,Extracurriculars,1,1
+Female,19,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,Extracurriculars,4,4
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,18,Family size <= 3,T,mother,No extracurriculars,2,3
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Male,19,Family size <= 3,A,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,2
+Male,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,father,Extracurriculars,1,1
+Female,20,Family size > 3,T,other,Extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,1,3
+Male,18,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,father,No extracurriculars,2,3
+Male,18,Family size <= 3,A,mother,Extracurriculars,3,4
+Male,17,Family size > 3,T,mother,Extracurriculars,3,4
+Female,18,Family size > 3,T,mother,Extracurriculars,2,2
+Male,18,Family size > 3,T,father,Extracurriculars,1,3
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,19,Family size > 3,T,other,Extracurriculars,3,3
+Female,18,Family size > 3,T,father,Extracurriculars,1,3
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,2,2
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,mother,No extracurriculars,2,3
+Female,18,Family size > 3,A,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,4
+Female,18,Family size > 3,T,father,Extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,1
+Female,19,Family size > 3,T,father,No extracurriculars,4,3
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,2
+Male,18,Family size > 3,T,other,No extracurriculars,2,4
+Male,17,Family size <= 3,A,mother,Extracurriculars,2,4
+Male,17,Family size <= 3,A,mother,No extracurriculars,3,4
+Female,18,Family size <= 3,T,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,father,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,3
+Male,18,Family size <= 3,A,mother,Extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,4
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,No extracurriculars,1,3
+Female,19,Family size > 3,T,other,Extracurriculars,2,3
+Female,18,Family size <= 3,T,other,No extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,No extracurriculars,2,2
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,1
+Male,17,Family size <= 3,T,father,No extracurriculars,2,2
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,Extracurriculars,1,2
+Male,19,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,20,Family size > 3,A,other,Extracurriculars,1,1
+Male,19,Family size > 3,T,father,Extracurriculars,1,2
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,father,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,4
+Female,17,Family size > 3,T,father,Extracurriculars,2,5
+Female,18,Family size > 3,T,father,No extracurriculars,1,1
+Male,19,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,3,3
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,A,mother,No extracurriculars,1,2
+Female,17,Family size <= 3,A,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,father,Extracurriculars,2,2
+Male,18,Family size <= 3,T,father,No extracurriculars,3,4
+Female,19,Family size > 3,T,other,Extracurriculars,4,3
+Female,19,Family size <= 3,A,other,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,2,4
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,mother,Extracurriculars,2,2
+Female,17,Family size > 3,T,father,No extracurriculars,2,3
+Female,17,Family size <= 3,T,father,No extracurriculars,2,3
+Female,18,Family size > 3,T,mother,Extracurriculars,1,2
+Male,18,Family size > 3,T,mother,Extracurriculars,2,2
+Male,17,Family size > 3,T,mother,Extracurriculars,3,5
+Male,17,Family size > 3,T,mother,No extracurriculars,5,5
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,Extracurriculars,2,5
+Male,18,Family size <= 3,T,mother,Extracurriculars,2,4
+Male,19,Family size > 3,T,other,No extracurriculars,2,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,1
+Male,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,18,Family size <= 3,T,other,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,2,3
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,A,mother,No extracurriculars,2,3
+Male,18,Family size > 3,T,father,Extracurriculars,2,2
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,3
+Female,17,Family size > 3,A,father,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,No extracurriculars,2,3
+Male,18,Family size > 3,T,mother,No extracurriculars,1,2
+Male,18,Family size > 3,T,mother,No extracurriculars,2,3
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,17,Family size > 3,T,mother,Extracurriculars,2,2
+Female,17,Family size > 3,T,mother,Extracurriculars,2,4
+Female,19,Family size <= 3,A,other,No extracurriculars,3,4
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,21,Family size <= 3,T,other,Extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,3
+Male,18,Family size <= 3,A,other,Extracurriculars,1,4
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Male,17,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,18,Family size <= 3,T,mother,Extracurriculars,1,1
+Male,21,Family size <= 3,T,other,Extracurriculars,5,2
+Female,20,Family size > 3,T,other,No extracurriculars,1,3
+Female,19,Family size > 3,T,other,No extracurriculars,4,4
+Male,17,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,1,2
+Male,18,Family size > 3,T,father,No extracurriculars,4,5
+Male,19,Family size > 3,T,mother,No extracurriculars,1,4
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,3
+Female,20,Family size > 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,2
+Female,16,Family size > 3,T,father,No extracurriculars,1,3
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,2,3
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,16,Family size <= 3,A,mother,No extracurriculars,1,3
+Male,16,Family size > 3,A,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,2
+Female,17,Family size > 3,T,father,No extracurriculars,2,2
+Female,15,Family size > 3,T,mother,No extracurriculars,3,5
+Female,16,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,15,Family size <= 3,T,father,No extracurriculars,1,2
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,3
+Female,15,Family size > 3,T,father,No extracurriculars,1,1
+Male,16,Family size > 3,T,mother,Extracurriculars,4,5
+Male,17,Family size > 3,T,mother,No extracurriculars,2,4
+Male,15,Family size <= 3,T,father,Extracurriculars,1,2
+Male,15,Family size <= 3,T,father,Extracurriculars,1,2
+Male,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,15,Family size > 3,T,mother,Extracurriculars,2,4
+Male,15,Family size <= 3,T,father,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,5,5
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Female,15,Family size > 3,T,mother,No extracurriculars,3,3
+Female,16,Family size > 3,T,father,No extracurriculars,2,1
+Male,17,Family size <= 3,T,mother,Extracurriculars,5,5
+Female,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,15,Family size > 3,T,father,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,4,3
+Female,15,Family size > 3,T,father,No extracurriculars,1,2
+Female,15,Family size <= 3,T,father,No extracurriculars,2,2
+Male,16,Family size > 3,T,father,Extracurriculars,3,4
+Female,18,Family size > 3,T,father,Extracurriculars,2,3
+Male,15,Family size > 3,T,mother,No extracurriculars,1,3
+Female,16,Family size > 3,T,father,Extracurriculars,1,1
+Male,15,Family size > 3,T,mother,No extracurriculars,1,2
+Male,16,Family size > 3,T,father,Extracurriculars,1,1
+Female,15,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,2,3
+Female,16,Family size <= 3,T,father,Extracurriculars,1,1
+Male,16,Family size <= 3,T,mother,Extracurriculars,2,3
+Male,15,Family size <= 3,T,father,Extracurriculars,3,5
+Female,15,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,15,Family size > 3,T,father,Extracurriculars,2,4
+Female,16,Family size > 3,T,father,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,19,Family size > 3,T,other,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,15,Family size <= 3,T,mother,No extracurriculars,1,3
+Female,16,Family size > 3,T,father,No extracurriculars,1,2
+Female,16,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size > 3,T,father,Extracurriculars,1,4
+Female,18,Family size <= 3,A,other,No extracurriculars,1,1
+Female,19,Family size > 3,T,mother,Extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,3,4
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Female,19,Family size > 3,T,other,No extracurriculars,4,1
+Female,16,Family size > 3,A,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,Extracurriculars,3,5
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,3
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,Extracurriculars,2,2
+Male,17,Family size > 3,T,mother,Extracurriculars,3,4
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,1,2
+Male,17,Family size > 3,T,father,Extracurriculars,5,5
+Male,16,Family size <= 3,T,father,Extracurriculars,1,5
+Male,17,Family size <= 3,T,mother,No extracurriculars,3,5
+Female,16,Family size > 3,T,other,Extracurriculars,1,1
+Female,19,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,2
+Female,20,Family size > 3,T,mother,Extracurriculars,2,4
+Female,17,Family size <= 3,T,father,No extracurriculars,1,1
+Male,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size <= 3,T,father,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,A,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,Extracurriculars,1,3
+Female,16,Family size > 3,T,mother,No extracurriculars,1,4
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,4
+Female,16,Family size > 3,T,father,Extracurriculars,2,3
+Female,16,Family size <= 3,T,mother,Extracurriculars,1,4
+Female,18,Family size > 3,A,father,No extracurriculars,1,3
+Male,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,3
+Female,16,Family size > 3,T,mother,Extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,2
+Male,18,Family size <= 3,T,mother,Extracurriculars,5,5
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Male,16,Family size <= 3,T,mother,No extracurriculars,2,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,16,Family size <= 3,T,father,No extracurriculars,1,2
+Male,17,Family size > 3,T,mother,Extracurriculars,5,5
+Male,17,Family size > 3,T,mother,No extracurriculars,3,3
+Male,16,Family size > 3,T,mother,No extracurriculars,1,4
+Female,16,Family size <= 3,T,mother,No extracurriculars,1,1
+Male,16,Family size <= 3,T,father,No extracurriculars,2,5
+Male,15,Family size > 3,T,mother,Extracurriculars,1,3
+Male,15,Family size <= 3,A,mother,Extracurriculars,2,3
+Male,15,Family size <= 3,A,mother,Extracurriculars,1,2
+Female,16,Family size <= 3,T,mother,No extracurriculars,2,2
+Female,16,Family size <= 3,T,mother,Extracurriculars,2,2
+Female,17,Family size > 3,T,mother,No extracurriculars,2,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,16,Family size > 3,T,mother,No extracurriculars,1,4
+Male,17,Family size > 3,T,father,Extracurriculars,1,3
+Male,17,Family size <= 3,T,father,Extracurriculars,3,3
+Male,17,Family size > 3,T,mother,Extracurriculars,3,4
+Female,17,Family size > 3,T,father,No extracurriculars,1,1
+Male,16,Family size <= 3,T,father,No extracurriculars,2,1
+Female,17,Family size > 3,A,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,2,3
+Male,16,Family size <= 3,A,father,No extracurriculars,2,2
+Male,17,Family size > 3,T,father,No extracurriculars,2,2
+Male,19,Family size > 3,T,mother,Extracurriculars,3,4
+Male,17,Family size <= 3,A,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,Extracurriculars,2,2
+Female,16,Family size > 3,T,father,No extracurriculars,1,1
+Male,16,Family size <= 3,T,mother,No extracurriculars,2,4
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,3,5
+Male,18,Family size > 3,T,other,No extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,1,3
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,4
+Female,16,Family size <= 3,T,father,Extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,2,3
+Male,16,Family size > 3,T,father,No extracurriculars,2,3
+Male,16,Family size <= 3,T,mother,Extracurriculars,2,4
+Male,18,Family size > 3,T,other,No extracurriculars,2,3
+Male,18,Family size > 3,T,mother,No extracurriculars,2,2
+Male,19,Family size > 3,T,mother,Extracurriculars,1,1
+Male,18,Family size > 3,T,mother,Extracurriculars,1,3
+Male,16,Family size > 3,T,mother,Extracurriculars,2,4
+Male,19,Family size > 3,T,other,Extracurriculars,1,3
+Female,16,Family size > 3,A,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,2
+Male,20,Family size > 3,T,other,No extracurriculars,2,4
+Female,18,Family size > 3,A,mother,No extracurriculars,3,4
+Male,18,Family size > 3,T,mother,No extracurriculars,5,5
+Male,19,Family size > 3,T,other,No extracurriculars,3,3
+Male,17,Family size > 3,T,mother,No extracurriculars,2,3
+Male,18,Family size <= 3,T,mother,No extracurriculars,2,3
+Male,19,Family size > 3,T,other,No extracurriculars,3,3
+Female,18,Family size > 3,A,mother,No extracurriculars,1,1
+Female,19,Family size <= 3,A,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,A,other,No extracurriculars,2,2
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,18,Family size <= 3,T,mother,Extracurriculars,1,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,17,Family size <= 3,T,father,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,2,2
+Female,18,Family size > 3,T,father,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,2
+Male,18,Family size <= 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Male,18,Family size <= 3,T,mother,No extracurriculars,5,5
+Male,18,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size > 3,T,father,No extracurriculars,3,4
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Female,18,Family size <= 3,T,father,No extracurriculars,1,4
+Female,18,Family size <= 3,A,mother,Extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,19,Family size > 3,T,father,No extracurriculars,2,3
+Female,17,Family size > 3,T,father,No extracurriculars,3,1
+Female,17,Family size <= 3,A,mother,Extracurriculars,1,2
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,1,1
+Female,19,Family size > 3,A,other,Extracurriculars,1,4
+Female,18,Family size > 3,T,mother,No extracurriculars,1,1
+Male,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,18,Family size > 3,T,father,No extracurriculars,1,1
+Female,17,Family size > 3,T,father,Extracurriculars,1,2
+Female,17,Family size <= 3,A,mother,No extracurriculars,1,2
+Male,18,Family size <= 3,T,father,No extracurriculars,1,2
+Female,18,Family size <= 3,T,father,No extracurriculars,1,1
+Female,18,Family size <= 3,A,mother,No extracurriculars,1,4
+Female,18,Family size > 3,T,mother,No extracurriculars,1,3
+Female,17,Family size <= 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,father,No extracurriculars,1,2
+Male,18,Family size > 3,T,mother,No extracurriculars,2,4
+Male,18,Family size <= 3,T,mother,No extracurriculars,2,2
+Female,17,Family size > 3,T,mother,No extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,1,2
+Female,18,Family size > 3,T,father,No extracurriculars,4,2
+Male,18,Family size <= 3,T,father,Extracurriculars,2,3
+Female,17,Family size > 3,T,mother,Extracurriculars,1,1
+Female,17,Family size > 3,T,mother,Extracurriculars,1,3
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,19,Family size > 3,T,other,No extracurriculars,1,1
+Female,18,Family size <= 3,T,mother,Extracurriculars,3,4
+Female,18,Family size > 3,T,mother,No extracurriculars,1,2
+Female,17,Family size > 3,T,mother,Extracurriculars,2,3
+Male,18,Family size > 3,T,father,Extracurriculars,1,4
+Male,18,Family size > 3,T,mother,Extracurriculars,1,3
+Male,17,Family size > 3,T,father,Extracurriculars,1,1
+Male,19,Family size > 3,T,mother,No extracurriculars,1,3
+Male,18,Family size > 3,T,father,No extracurriculars,4,3
+Female,18,Family size > 3,T,mother,No extracurriculars,1,3
+Female,17,Family size > 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,2,2
+Female,19,Family size > 3,T,mother,Extracurriculars,1,2
+Female,18,Family size <= 3,T,mother,No extracurriculars,1,1
+Female,18,Family size > 3,T,mother,Extracurriculars,1,1
+Male,17,Family size <= 3,T,mother,No extracurriculars,3,4
+Male,18,Family size <= 3,T,mother,No extracurriculars,3,4

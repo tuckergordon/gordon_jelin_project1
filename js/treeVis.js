@@ -1,13 +1,12 @@
 var dataset = [];
 
-d3.csv("students.csv", function(error, data) {
+d3.csv("student-por.csv", function(error, data) {
 	dataset = data;         // copy to dataset
     // error checking
     if (error) {
 		console.log(error)
     }
     else {
-		console.log(data[681]["age"])	//just testing that it works
 		//createVis()
     }
 });
@@ -54,7 +53,24 @@ function generateTreeJSON() {
 
 					var extraCurrChildren = [];
 
-					//for loop for accessing dataset
+					var result = {};
+					result["name"] = "Avg. Weekend Alcohol Consumption: ";
+
+					var avgWalc = getAvgWalcForStudent(sex.name,
+														age.name,
+														familySize.name,
+														extraCurr.name).toString();
+
+					if (avgWalc.valueOf() == (-1).toString()) {
+						avgWalc = "NA";
+					} else {
+						avgWalc = (Math.round(avgWalc * 100) / 100);
+					}
+
+					result["name"] += avgWalc.toString();
+					result["parent"] = extraCurrs[l];
+
+					extraCurrChildren.push(result);
 
 					extraCurr["children"] = extraCurrChildren;
 					familySizeChildren.push(extraCurr);
@@ -78,7 +94,31 @@ function generateTreeJSON() {
 	return treeJSON;
 }
 
-var treeData = generateTreeJSON();
+function getAvgWalcForStudent(sex, age, famsize, activities) {
+	var totalWalc = 0,
+		numStudents = 0;
+	for (var i = 0; i < dataset.length; i++) {
+		var student = dataset[i];
+		if (student["sex"].valueOf() == sex.valueOf()) {
+			if (student["age"].valueOf() == age.valueOf()) {
+				if (student["famsize"].valueOf() == famsize.valueOf()) {
+					if (student["activities"].valueOf() == activities.valueOf()) {
+						totalWalc += Number(student["Walc"]);
+						numStudents++;
+					}
+				}
+			}
+		}
+	}
+	if (numStudents != 0) return totalWalc / numStudents;
+	else return -1;
+	// var avgWalc = (numStudents != 0) ? totalWalc / numStudents : -1;
+	// return avgWalc;
+}
+
+//var treeData = generateTreeJSON();
+
+//console.log(JSON.stringify(treeData));
 
 var margins = [20, 120, 20, 120],
 	width = 1280 - margins[1] - margins[3],
