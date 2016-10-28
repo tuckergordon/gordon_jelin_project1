@@ -54,20 +54,22 @@ function generateTreeJSON() {
 					var extraCurrChildren = [];
 
 					var result = {};
-					result["name"] = "Avg. Weekend Alcohol Consumption: ";
 
-					var avgWalc = getAvgWalcForStudent(sex.name,
+					var averages = getAvgWalcAndDalcForStudent(sex.name,
 														age.name,
 														familySize.name,
-														extraCurr.name).toString();
+														extraCurr.name);
 
-					if (avgWalc.valueOf() == (-1).toString()) {
-						avgWalc = "NA";
+					if (averages == -1) {
+						result["name"] = "NA";
 					} else {
-						avgWalc = (Math.round(avgWalc * 100) / 100);
+						var avgWalc = (Math.round(Number(averages["walc"]) * 100) / 100);
+						var avgDalc = (Math.round(Number(averages["dalc"]) * 100) / 100);
+						var numStudents = averages["numStudents"];
+						result["name"] = "Avg. Weekend Alcohol Consumption: " + avgWalc + "/5 ("
+											+ numStudents + " students)"
 					}
 
-					result["name"] += avgWalc.toString();
 					result["parent"] = extraCurrs[l];
 
 					extraCurrChildren.push(result);
@@ -94,8 +96,9 @@ function generateTreeJSON() {
 	return treeJSON;
 }
 
-function getAvgWalcForStudent(sex, age, famsize, activities) {
+function getAvgWalcAndDalcForStudent(sex, age, famsize, activities) {
 	var totalWalc = 0,
+		totalDalc = 0,
 		numStudents = 0;
 	for (var i = 0; i < dataset.length; i++) {
 		var student = dataset[i];
@@ -104,27 +107,34 @@ function getAvgWalcForStudent(sex, age, famsize, activities) {
 				if (student["famsize"].valueOf() == famsize.valueOf()) {
 					if (student["activities"].valueOf() == activities.valueOf()) {
 						totalWalc += Number(student["Walc"]);
+						totalDalc += Number(student["Dalc"]);
 						numStudents++;
 					}
 				}
 			}
 		}
 	}
-	if (numStudents != 0) return totalWalc / numStudents;
+	if (numStudents != 0) {
+		var avgWalc = totalWalc / numStudents;
+		var avgDalc = totalDalc / numStudents;
+		var averages = {};
+		averages["walc"] = avgWalc;
+		averages["dalc"] = avgDalc;
+		averages["numStudents"] = numStudents;
+		return averages;
+	}
 	else return -1;
-	// var avgWalc = (numStudents != 0) ? totalWalc / numStudents : -1;
-	// return avgWalc;
 }
 
-//these commented out functions are how we generated the tree's JSON
-//setTimeout(alert("Ready"), 100000);
-//var treeData = generateTreeJSON();
-//console.log(JSON.stringify(treeData));
+// these commented out functions are how we generated the tree's JSON
+// setTimeout(alert("Ready"), 100000);
+// var treeData = generateTreeJSON();
+// console.log(JSON.stringify(treeData));
 
 function createVis() {
 	var margins = [20, 120, 20, 120],
 		width = 1280 - margins[1] - margins[3],
-		height = 800 - margins[0] - margins[2],
+		height = 700 - margins[0] - margins[2],
 		duration = 750,
 		i = 0,
 		root;
@@ -147,7 +157,7 @@ function createVis() {
 
 	update(root, tree);
 
-	d3.select(self.frameElement).style("height", "800px");
+	d3.select(self.frameElement).style("height", "600px");
 
 	function update(source) {
 
@@ -156,7 +166,7 @@ function createVis() {
 		  links = tree.links(nodes);
 
 	  // Normalize for fixed-depth.
-	  nodes.forEach(function(d) { d.y = d.depth * 180; });
+	  nodes.forEach(function(d) { d.y = d.depth * 120; });
 
 	  // Update the nodes…
 	  var node = svg.selectAll("g.node")
