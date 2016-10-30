@@ -58,13 +58,16 @@ path.link {
   stroke-width: 2px;
 }
 
-.axis--x path {
-  display: none;
-}
-
 .line {
   fill: none;
   stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
 }
 
+#avgDalcLine {
+  stroke: red;
+}
+
+#avgWalcLine {
+  stroke: green;
+}
