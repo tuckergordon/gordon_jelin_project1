@@ -15,7 +15,7 @@ function generateTreeJSON() {
 	var treeJSON = [];
 
 	var sexes = ["Male", "Female"],
-		ages = ["15", "16", "17", "18", "19", "20", "21", "22"],
+		ages = ["15", "16", "17", "18", "19", "20"],
 		familySizes = ["Family size > 3", "Family size <= 3"],
 		extraCurrs = ["Extracurriculars", "No extracurriculars"];
 
@@ -145,7 +145,7 @@ function createVis() {
 	var diagonal = d3.svg.diagonal()
 							.projection(function(d) {return [d.y, d.x];});
 
-	var svg = d3.select("body").append("svg")
+	var svgTree = d3.select("body").append("svg")
 				.attr("width", width + margins[1] + margins[3])
 				.attr("height", height + margins[0] + margins[2])
 				.append("g")
@@ -169,7 +169,7 @@ function createVis() {
 	  nodes.forEach(function(d) { d.y = d.depth * 120; });
 
 	  // Update the nodes…
-	  var node = svg.selectAll("g.node")
+	  var node = svgTree.selectAll("g.node")
 		  .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
 	  // Enter any new nodes at the parent's previous position.
@@ -214,7 +214,7 @@ function createVis() {
 		  .style("fill-opacity", 1e-6);
 
 	  // Update the links…
-	  var link = svg.selectAll("path.link")
+	  var link = svgTree.selectAll("path.link")
 		  .data(links, function(d) { return d.target.id; });
 
 	  // Enter any new links at the parent's previous position.
