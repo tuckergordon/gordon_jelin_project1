@@ -73,11 +73,11 @@ path.link {
   stroke-width: 3px;
 }
 
-.linePoint {
+.linePoint, .dalcWalcLinePoint {
   fill: steelblue;
 }
 
-.linePoint:hover {
+.linePoint:hover, .dalcWalcLinePoint:hover {
   fill: orange;
   cursor: pointer;
 }

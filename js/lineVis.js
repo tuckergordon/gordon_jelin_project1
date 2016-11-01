@@ -8,7 +8,8 @@ var dataset = [],
 	avgAlcConsumption,
 	showingDalcAndWalc = false,
 	showingParents = false,
-	avgAlcLine;
+	avgAlcLine,
+	pointRadius = 6;
 
 d3.csv("student-por.csv", function(error, data) {
 	dataset = data;         // copy to dataset
@@ -57,10 +58,12 @@ function createVis(avgAlcConsumption) {
 							.x(function(d, i) { return xScale(i + 15); })
 							.y(function(d) { return yScale(d); });
 
+	// add the line
 	svgLine.append("path")
 	  .attr("class", "line")
 	  .attr("d", avgAlcLine(avgAlcConsumption));
 
+	// add points to the line
   	svgLine.selectAll("linePoint")
   			.data(avgAlcConsumption)
   			.enter().append("circle")
@@ -70,39 +73,12 @@ function createVis(avgAlcConsumption) {
   			.attr("cy", function(d) {
   				return yScale(d);
   			})
-  			.attr("r", 7)
+  			.attr("r", pointRadius)
   			.attr("class", "linePoint")
   			// hover functionality
 			   .on("mouseover", function(d) {
-
-			   		var bodyRect = document.body.getBoundingClientRect(),
-			   			svgRect  = document.getElementById("svgLine").getBoundingClientRect();
-
-			   		//Get this point's x/y values, then augment for the tooltip
-					var xPosition = document.getElementById("svgLine").getBoundingClientRect().left +
-									 (parseFloat(d3.select(this).attr("cx"))) + margin.left;
-
-					var yPosition = document.getElementById("svgLine").getBoundingClientRect().top +
-									 (parseFloat(d3.select(this).attr("cy"))) + margin.top;
-
-					console.log(document.getElementById("svgLine").getBoundingClientRect().top);
-
-					var tooltipAttr = "Weekly average: ";
-					var tooltipText = (Math.round(d * 100) / 100) + " / 5";
-
-					var tooltip = d3.select("#tooltip");
-
-					//Update the tooltip position and value
-					d3.select("#tooltip").style("left", xPosition + "px")
-							.style("top", yPosition + "px")						
-							.select("#value")
-							.text(tooltipText);
-					d3.select("#tooltip")
-						.select("#attribute")
-						.text(tooltipAttr);
-			   
-					//Show the tooltip
-					tooltip.classed("hidden", false);
+			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
+			   					parseFloat(d3.select(this).attr("cy")));
 			   })
 			   .on("mouseout", function() {
 					//Hide the tooltip
@@ -144,6 +120,28 @@ function createVis(avgAlcConsumption) {
 		  .attr("dy", "0.71em")
 		  .style("text-anchor", "end")
 		  .text("Age");
+}
+
+function showTooltip(d, cx, cy) {
+	//Get this point's x/y values, then augment for the tooltip
+	var xPosition = document.getElementById("svgLine").getBoundingClientRect().left +
+					window.scrollX + cx + margin.left;
+
+	var yPosition = document.getElementById("svgLine").getBoundingClientRect().top + 
+					window.scrollY + cy + margin.top;
+
+	var tooltipText = (Math.round(d * 100) / 100) + " / 5";
+
+	var tooltip = d3.select("#tooltip");
+
+	//Update the tooltip position and value
+	d3.select("#tooltip").style("left", xPosition + "px")
+			.style("top", yPosition + "px")						
+			.select("#value")
+			.text(tooltipText);
+
+	//Show the tooltip
+	tooltip.classed("hidden", false);
 }
 
 // http://stackoverflow.com/questions/17732704/how-to-make-the-checkbox-unchecked-by-default-always
@@ -189,7 +187,36 @@ function showWalcAndDalc() {
 		  .attr("d", avgAlcLine(avgAlcConsumption))
 		  .transition()
 		  .duration(1000)
-		  .attr("d", avgAlcLine(avgDalcConsumption));		
+		  .attr("d", avgAlcLine(avgDalcConsumption));
+
+  	// add points to the line
+  	svgLine.selectAll("linePoint")
+  			.data(avgDalcConsumption)
+  			.enter().append("circle")
+  			.attr("r", pointRadius)
+  			.attr("class", "linePoint")
+  			.attr("class", "dalcWalcLinePoint")
+  			// hover functionality
+			   .on("mouseover", function(d) {
+			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
+			   					parseFloat(d3.select(this).attr("cy")));
+			   })
+			   .on("mouseout", function() {
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+					
+		   		})
+  			.attr("cx", function(d, i) {
+  				return xScale(i + 15);
+  			})
+  			.attr("cy", function(d) {
+  				return yScale(d);
+  			})
+  			.attr("visibility", "hidden")
+			.transition()
+			.delay(1000)
+	  		.attr("visibility", "visible");
+  				
 
   	svgLine.append("text")
   		.attr("class", "dalcWalcLabel")
@@ -214,6 +241,35 @@ function showWalcAndDalc() {
 	  .duration(1000)
 	  .attr("d", avgAlcLine(avgWalcConsumption));
 
+  	// add points to the line
+  	svgLine.selectAll("linePoint")
+  			.data(avgWalcConsumption)
+  			.enter().append("circle")
+  			.attr("r", pointRadius)
+  			.attr("class", "linePoint")
+  			.attr("class", "dalcWalcLinePoint")
+  			// hover functionality
+			   .on("mouseover", function(d) {
+			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
+			   					parseFloat(d3.select(this).attr("cy")));
+			   })
+			   .on("mouseout", function() {
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+					
+		   		})
+		   	.attr("cx", function(d, i) {
+  				return xScale(i + 15);
+  			})
+  			.attr("cy", function(d) {
+  				return yScale(d);
+  			})
+  			.attr("visibility", "hidden")
+			.transition()
+			.delay(1000)
+	  		.attr("visibility", "visible");
+  			
+
   	svgLine.append("text")
   		.attr("class", "dalcWalcLabel")
   		.attr("transform", function(d, i) {
@@ -233,6 +289,10 @@ function hideWalcAndDalc() {
 	svgLine.selectAll(".dalcWalcLabel")
 			.transition()
 			.remove();
+			
+	svgLine.selectAll(".dalcWalcLinePoint")
+			.transition()
+			.remove();
 
 	svgLine.select("#avgDalcLine")
 			.transition()
@@ -244,6 +304,7 @@ function hideWalcAndDalc() {
 			.duration(1000)
 			.attr("d", avgAlcLine(avgAlcConsumption))
 			.remove();
+
 }
 
 function showParents () {
@@ -373,7 +434,6 @@ function calculateAvgOf(attribute) {
 	for (var i = 0; i < 6; i++) {
 		averages.push(total[i] / numStudents[i]);
 	}
-	console.log(averages);
 	return averages;
 }
 
