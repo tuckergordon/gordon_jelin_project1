@@ -10,6 +10,15 @@ text {
     font-size: 11px;
 }
 
+body #checkboxContainer {
+  text-align: left;
+}
+
+.checkboxText {
+  font-family: sans-serif;
+    font-size: 11px;
+}
+
 .title {
 	font-size: 20px;
 	font-weight: bold;
@@ -21,15 +30,15 @@ text {
 
 .thinBar {
 	display: block;
-    background: lightslategray;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #FFF;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    padding: 2px;
-    font-size: 10%;
+  background: lightslategray;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #FFF;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  padding: 2px;
+  font-size: 10%;
 }
 
 body {

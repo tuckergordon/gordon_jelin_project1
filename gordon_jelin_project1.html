@@ -27,7 +27,15 @@
     	<!-- External file for each visualization -->
         <!-- <script type="text/javascript" src="js/treeVis.js"></script> -->
         <script type="text/javascript" src="js/lineVis.js"></script>
-
-        <input id="btnToggleWalcDalc" type="button" name="click me" value="Show weekend vs weekday drinking" onclick="toggleWalcAndDalc()">
+        <div id="checkboxContainer">
+            <input type="checkbox" class="checkboxToggle" onchange="toggleWalcAndDalc()" onload="uncheck()">
+                <span class="checkboxText">Weekend and weekday drinking</span>
+            </input>
+            <br>
+            <input type="checkbox" class="checkboxToggle" onchange="toggleParents()" onload="uncheck()">
+                <span class="checkboxText">Parents</span>
+            </input>
+        </div>
+        
     </body>
 </html>

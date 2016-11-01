@@ -1,5 +1,3 @@
-
-
 var dataset = [],
 	svgLine,
 	width,
@@ -8,6 +6,7 @@ var dataset = [],
 	yAxis,
 	avgAlcConsumption,
 	showingDalcAndWalc = false,
+	showingParents = false;
 	avgAlcLine;
 
 d3.csv("student-por.csv", function(error, data) {
@@ -96,15 +95,35 @@ function createVis(avgAlcConsumption) {
 		  .text("Age");
 }
 
+// http://stackoverflow.com/questions/17732704/how-to-make-the-checkbox-unchecked-by-default-always
+// ensures that the checkboxes start unchecked
+function uncheck() {
+	var checkboxes = document.getElementsByClass('checkboxToggle');
+
+	for (var i=0; i<checkboxes.length; i++)  {
+	  if (checkboxes[i].type == 'checkbox')   {
+	    checkboxes[i].checked = false;
+	  }
+	}
+}
+
 function toggleWalcAndDalc() {
 	if (showingDalcAndWalc) {
 		hideWalcAndDalc();
-		document.getElementById("btnToggleWalcDalc").value = "Show weekend vs weekday drinking";
 		showingDalcAndWalc = false;
 	} else {
 		showWalcAndDalc();
-		document.getElementById("btnToggleWalcDalc").value = "Hide weekend vs weekday drinking";
 		showingDalcAndWalc = true;
+	}
+}
+
+function toggleParents() {
+	if (showingParents) {
+		hideParents();
+		showingParents = false;
+	} else {
+		showParents();
+		showingParents = true;
 	}
 }
 
@@ -174,6 +193,14 @@ function hideWalcAndDalc() {
 			.duration(1000)
 			.attr("d", avgAlcLine(avgAlcConsumption))
 			.remove();
+}
+
+function showParents () {
+	
+}
+
+function hideParents () {
+
 }
 
 function calculateAvgAlcConsumption() {
