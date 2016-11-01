@@ -1,5 +1,6 @@
 var dataset = [],
 	svgLine,
+	margin,
 	width,
 	height,
 	xAxis,
@@ -24,7 +25,7 @@ d3.csv("student-por.csv", function(error, data) {
 });
 
 function createVis(avgAlcConsumption) {
-	var margin = {top: 20, right: 200, bottom: 30, left: 50};
+	margin = {top: 20, right: 200, bottom: 30, left: 50};
     width = 960 - margin.left - margin.right;
     height = 500 - margin.top - margin.bottom;
 
@@ -48,6 +49,7 @@ function createVis(avgAlcConsumption) {
 				.append("svg")
 					.attr("width", width + margin.left + margin.right)
 					.attr("height", height + margin.top + margin.bottom)
+					.attr("id", "svgLine")
 				.append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -59,17 +61,54 @@ function createVis(avgAlcConsumption) {
 	  .attr("class", "line")
 	  .attr("d", avgAlcLine(avgAlcConsumption));
 
-  	svgLine.append("g")
-  			.attr("class", "linePoint")
-  			.append("circle")
+  	svgLine.selectAll("linePoint")
+  			.data(avgAlcConsumption)
+  			.enter().append("circle")
   			.attr("cx", function(d, i) {
   				return xScale(i + 15);
   			})
   			.attr("cy", function(d) {
   				return yScale(d);
   			})
-  			.attr("r", 3.5)
-  			.style("fill", "red");
+  			.attr("r", 7)
+  			.attr("class", "linePoint")
+  			// hover functionality
+			   .on("mouseover", function(d) {
+
+			   		var bodyRect = document.body.getBoundingClientRect(),
+			   			svgRect  = document.getElementById("svgLine").getBoundingClientRect();
+
+			   		//Get this point's x/y values, then augment for the tooltip
+					var xPosition = document.getElementById("svgLine").getBoundingClientRect().left +
+									 (parseFloat(d3.select(this).attr("cx"))) + margin.left;
+
+					var yPosition = document.getElementById("svgLine").getBoundingClientRect().top +
+									 (parseFloat(d3.select(this).attr("cy"))) + margin.top;
+
+					console.log(document.getElementById("svgLine").getBoundingClientRect().top);
+
+					var tooltipAttr = "Weekly average: ";
+					var tooltipText = (Math.round(d * 100) / 100) + " / 5";
+
+					var tooltip = d3.select("#tooltip");
+
+					//Update the tooltip position and value
+					d3.select("#tooltip").style("left", xPosition + "px")
+							.style("top", yPosition + "px")						
+							.select("#value")
+							.text(tooltipText);
+					d3.select("#tooltip")
+						.select("#attribute")
+						.text(tooltipAttr);
+			   
+					//Show the tooltip
+					tooltip.classed("hidden", false);
+			   })
+			   .on("mouseout", function() {
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+					
+			   });
 
   	svgLine.append("text")
   		.attr("transform", function(d, i) {
@@ -208,11 +247,96 @@ function hideWalcAndDalc() {
 }
 
 function showParents () {
-	
+
+	var avgParentsTogetherAlcConsumption = calculateParentsTogetherAvg();
+	var avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
+	var avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
+
+
+	svgLine.append("path")
+		  .attr("class", "line")
+		  .attr("id", "avgDalcLine")
+		  .attr("d", avgAlcLine(avgAlcConsumption))
+		  .transition()
+		  .duration(1000)
+		  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));		
+
+  // 	svgLine.append("text")
+  // 		.attr("class", "dalcWalcLabel")
+  // 		.attr("transform", function(d, i) {
+  // 			return "translate(" + xScale(avgDalcConsumption.length -1 + 15) + ","
+		// 						+ yScale(avgDalcConsumption[avgDalcConsumption.length-1]) + ")";
+		// })
+		// .attr("x", 3)
+  // 		.attr("dy", "0.3em")
+  // 		.text("Workday Average")
+  // 		.attr("visibility", "hidden")
+		// .transition()
+		// .delay(1000)
+  // 		.attr("visibility", "visible");
+  			
+	svgLine.append("path")
+	  .attr("class", "line")
+	  .attr("id", "avgWalcLine")
+	  .attr("d", avgAlcLine(avgAlcConsumption))
+	  .transition()
+	  .duration(1000)
+	  .attr("d", avgAlcLine(avgParentsSepMotherAlcConsumption));
+
+  // 	svgLine.append("text")
+  // 		.attr("class", "dalcWalcLabel")
+  // 		.attr("transform", function(d, i) {
+  // 			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
+		// 						+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
+		// })
+		// .attr("x", 3)
+  // 		.attr("dy", "0.3em")
+  // 		.text("Weekend Average")
+  // 		.attr("visibility", "hidden")
+		// .transition()
+		// .delay(1000)
+  // 		.attr("visibility", "visible");
+
+	svgLine.append("path")
+	  .attr("class", "line")
+	  .attr("id", "avgWalcLine")
+	  .attr("d", avgAlcLine(avgAlcConsumption))
+	  .transition()
+	  .duration(1000)
+	  .attr("d", avgAlcLine(avgParentsSepFatherAlcConsumption));
+
+  // 	svgLine.append("text")
+  // 		.attr("class", "dalcWalcLabel")
+  // 		.attr("transform", function(d, i) {
+  // 			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
+		// 						+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
+		// })
+		// .attr("x", 3)
+  // 		.attr("dy", "0.3em")
+  // 		.text("Weekend Average")
+  // 		.attr("visibility", "hidden")
+		// .transition()
+		// .delay(1000)
+  // 		.attr("visibility", "visible");
+
+
 }
 
 function hideParents () {
+	svgLine.selectAll(".dalcWalcLabel")
+			.transition()
+			.remove();
 
+	svgLine.select("#avgDalcLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(avgAlcConsumption))
+			.remove();
+	svgLine.select("#avgWalcLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(avgAlcConsumption))
+			.remove();
 }
 
 function calculateAvgAlcConsumption() {
@@ -244,6 +368,64 @@ function calculateAvgOf(attribute) {
 
 		 total[ageIndex] += alcConsumption;
 		 numStudents[ageIndex]++;
+	}
+
+	for (var i = 0; i < 6; i++) {
+		averages.push(total[i] / numStudents[i]);
+	}
+	console.log(averages);
+	return averages;
+}
+
+function calculateParentsTogetherAvg() {
+	var total = [],
+		numStudents = [],
+		averages = [];
+
+	for (var i = 0; i < 6; i++) {
+		total.push(0);
+		numStudents.push(0);
+	}
+
+	for (var i = 0; i < dataset.length; i++) {
+		var alcConsumption = (Number(dataset[i]["Dalc"]) + Number(dataset[i]["Walc"]))/2;
+
+		 var ageIndex = Number(dataset[i].age) - 15;
+
+		 if (dataset[i]["Pstatus"] == "T") {
+		 	total[ageIndex] += alcConsumption;
+		 	numStudents[ageIndex]++;
+		 }
+	}
+
+	for (var i = 0; i < 6; i++) {
+		averages.push(total[i] / numStudents[i]);
+	}
+	console.log(averages);
+	return averages;
+}
+
+function calculateParentsSepAvg(attribute) {
+	var total = [],
+		numStudents = [],
+		averages = [];
+
+	for (var i = 0; i < 6; i++) {
+		total.push(0);
+		numStudents.push(0);
+	}
+
+	for (var i = 0; i < dataset.length; i++) {
+		var alcConsumption = (Number(dataset[i]["Dalc"]) + Number(dataset[i]["Walc"]))/2;
+
+		 var ageIndex = Number(dataset[i].age) - 15;
+
+		 if (dataset[i]["Pstatus"] == "A") {
+		 	if (dataset[i]["guardian" == attribute ]) {
+		 		total[ageIndex] += alcConsumption;
+		 		numStudents[ageIndex]++;
+		 	}
+		 }
 	}
 
 	for (var i = 0; i < 6; i++) {
