@@ -10,7 +10,7 @@ text {
     font-size: 11px;
 }
 
-body #checkboxContainer {
+body #radioContainer {
   text-align: left;
 }
 
@@ -115,4 +115,16 @@ path.link {
 
 #avgWalcLine {
   stroke: green;
+}
+
+#avgParentsTogetherLine {
+  stroke: crimson;
+}
+
+#avgParentsSepMotherLine {
+  stroke: seagreen;
+}
+
+#avgParentsSepFatherLine {
+  stroke: purple;
 }

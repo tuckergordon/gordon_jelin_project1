@@ -6,10 +6,12 @@ var dataset = [],
 	xAxis,
 	yAxis,
 	avgAlcConsumption,
+	avgParentsSepMotherAlcConsumption,
+	avgParentsSepFatherAlcConsumption,
 	showingDalcAndWalc = false,
 	showingParents = false,
 	avgAlcLine,
-	pointRadius = 6;
+	pointRadius = 5;
 
 d3.csv("student-por.csv", function(error, data) {
 	dataset = data;         // copy to dataset
@@ -75,13 +77,13 @@ function createVis(avgAlcConsumption) {
   			})
   			.attr("r", pointRadius)
   			.attr("class", "linePoint")
-  			// hover functionality
+  				// show tooltip on hover
 			   .on("mouseover", function(d) {
 			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
 			   					parseFloat(d3.select(this).attr("cy")));
 			   })
+			   // hide tooltip otherwise
 			   .on("mouseout", function() {
-					//Hide the tooltip
 					d3.select("#tooltip").classed("hidden", true);
 					
 			   });
@@ -145,15 +147,13 @@ function showTooltip(d, cx, cy) {
 }
 
 // http://stackoverflow.com/questions/17732704/how-to-make-the-checkbox-unchecked-by-default-always
-// ensures that the checkboxes start unchecked
-function uncheck() {
-	var checkboxes = document.getElementsByClass('checkboxToggle');
+// ensures that the radio buttons start unchecked
+// function uncheck() {
+// 	$("input:radio:checked").prop('checked', false);
+// }
 
-	for (var i=0; i<checkboxes.length; i++)  {
-	  if (checkboxes[i].type == 'checkbox')   {
-	    checkboxes[i].checked = false;
-	  }
-	}
+function toggleLines() {
+	var checkedRadio = $("input:radio:checked");
 }
 
 function toggleWalcAndDalc() {
@@ -289,7 +289,7 @@ function hideWalcAndDalc() {
 	svgLine.selectAll(".dalcWalcLabel")
 			.transition()
 			.remove();
-			
+
 	svgLine.selectAll(".dalcWalcLinePoint")
 			.transition()
 			.remove();
@@ -310,94 +310,138 @@ function hideWalcAndDalc() {
 function showParents () {
 
 	var avgParentsTogetherAlcConsumption = calculateParentsTogetherAvg();
-	var avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
-	var avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
-
+	avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
+	avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
 
 	svgLine.append("path")
 		  .attr("class", "line")
-		  .attr("id", "avgDalcLine")
+		  .attr("id", "avgParentsTogetherLine")
 		  .attr("d", avgAlcLine(avgAlcConsumption))
 		  .transition()
 		  .duration(1000)
-		  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));		
+		  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));
 
-  // 	svgLine.append("text")
-  // 		.attr("class", "dalcWalcLabel")
-  // 		.attr("transform", function(d, i) {
-  // 			return "translate(" + xScale(avgDalcConsumption.length -1 + 15) + ","
-		// 						+ yScale(avgDalcConsumption[avgDalcConsumption.length-1]) + ")";
-		// })
-		// .attr("x", 3)
-  // 		.attr("dy", "0.3em")
-  // 		.text("Workday Average")
-  // 		.attr("visibility", "hidden")
-		// .transition()
-		// .delay(1000)
-  // 		.attr("visibility", "visible");
+  	// add points to the line
+  	svgLine.selectAll("linePoint")
+  			.data(avgParentsTogetherAlcConsumption)
+  			.enter().append("circle")
+  			.attr("r", pointRadius)
+  			.attr("class", "linePoint")
+  			.attr("class", "parentsTogetherLinePoint")
+  			// hover functionality
+			   .on("mouseover", function(d) {
+			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
+			   					parseFloat(d3.select(this).attr("cy")));
+			   })
+			   .on("mouseout", function() {
+					//Hide the tooltip
+					d3.select("#tooltip").classed("hidden", true);
+					
+		   		})
+		   	.attr("cx", function(d, i) {
+  				return xScale(i + 15);
+  			})
+  			.attr("cy", function(d) {
+  				return yScale(d);
+  			})
+  			.attr("visibility", "hidden")
+			.transition()
+			.delay(1000)
+	  		.attr("visibility", "visible");		
+
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) {
+  			return "translate(" + xScale(avgParentsTogetherAlcConsumption.length -1 + 15) + ","
+								+ yScale(avgParentsTogetherAlcConsumption[avgParentsTogetherAlcConsumption.length-1]) + ")";
+		})
+		.attr("x", 3)
+  		.attr("dy", "0.3em")
+  		.text("Average Alcohol Consumption Parents Together")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
   			
 	svgLine.append("path")
 	  .attr("class", "line")
-	  .attr("id", "avgWalcLine")
+	  .attr("id", "avgParentsSepMotherLine")
 	  .attr("d", avgAlcLine(avgAlcConsumption))
 	  .transition()
 	  .duration(1000)
 	  .attr("d", avgAlcLine(avgParentsSepMotherAlcConsumption));
 
-  // 	svgLine.append("text")
-  // 		.attr("class", "dalcWalcLabel")
-  // 		.attr("transform", function(d, i) {
-  // 			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
-		// 						+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
-		// })
-		// .attr("x", 3)
-  // 		.attr("dy", "0.3em")
-  // 		.text("Weekend Average")
-  // 		.attr("visibility", "hidden")
-		// .transition()
-		// .delay(1000)
-  // 		.attr("visibility", "visible");
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) { 
+  			return "translate(" + xScale(avgParentsSepMotherAlcConsumption.length -1 + 15) + ","
+								+ yScale(avgParentsSepMotherAlcConsumption[avgParentsSepMotherAlcConsumption.length-1]) + ")";
+		})
+		.attr("x", 3)
+  		.attr("dy", "0.3em")
+  		.text("Parents Separated, Mother is Gaurdian")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
 
 	svgLine.append("path")
 	  .attr("class", "line")
-	  .attr("id", "avgWalcLine")
+	  .attr("id", "avgParentsSepFatherLine")
 	  .attr("d", avgAlcLine(avgAlcConsumption))
 	  .transition()
 	  .duration(1000)
 	  .attr("d", avgAlcLine(avgParentsSepFatherAlcConsumption));
 
-  // 	svgLine.append("text")
-  // 		.attr("class", "dalcWalcLabel")
-  // 		.attr("transform", function(d, i) {
-  // 			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
-		// 						+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
-		// })
-		// .attr("x", 3)
-  // 		.attr("dy", "0.3em")
-  // 		.text("Weekend Average")
-  // 		.attr("visibility", "hidden")
-		// .transition()
-		// .delay(1000)
-  // 		.attr("visibility", "visible");
-
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) { 
+  			return "translate(" + xScale(avgParentsSepFatherAlcConsumption.length -1 + 15) + ","
+								+ (yScale(avgParentsSepFatherAlcConsumption[avgParentsSepFatherAlcConsumption.length-1])-15) + ")";
+		})
+		.attr("x", 3)
+  		.attr("dy", "0.3em")
+  		.text("Parents Separated, Father is Guardian")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
 
 }
 
 function hideParents () {
-	svgLine.selectAll(".dalcWalcLabel")
+	svgLine.selectAll(".parentsLabel")
 			.transition()
 			.remove();
 
-	svgLine.select("#avgDalcLine")
+	var sepMotherTrimmedAvgAlcConsumption = [];
+	var sepFatherTrimmedAvgAlcConsumption = [];
+
+	
+	for (var i = 0; i < avgParentsSepMotherAlcConsumption.length; i++) {
+				sepMotherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
+			}	
+
+	for (var i = 0; i < avgParentsSepFatherAlcConsumption.length; i++) {
+				sepFatherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
+			}		
+
+	svgLine.select("#avgParentsTogetherLine")
 			.transition()
 			.duration(1000)
 			.attr("d", avgAlcLine(avgAlcConsumption))
 			.remove();
-	svgLine.select("#avgWalcLine")
+	svgLine.select("#avgParentsSepMotherLine")
 			.transition()
 			.duration(1000)
-			.attr("d", avgAlcLine(avgAlcConsumption))
+			.attr("d", avgAlcLine(sepMotherTrimmedAvgAlcConsumption))
 			.remove();
+	svgLine.select("#avgParentsSepFatherLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(sepFatherTrimmedAvgAlcConsumption))
+			.remove();
+
 }
 
 function calculateAvgAlcConsumption() {
@@ -481,7 +525,7 @@ function calculateParentsSepAvg(attribute) {
 		 var ageIndex = Number(dataset[i].age) - 15;
 
 		 if (dataset[i]["Pstatus"] == "A") {
-		 	if (dataset[i]["guardian" == attribute ]) {
+		 	if (dataset[i]["guardian"] == attribute) {
 		 		total[ageIndex] += alcConsumption;
 		 		numStudents[ageIndex]++;
 		 	}
@@ -489,7 +533,9 @@ function calculateParentsSepAvg(attribute) {
 	}
 
 	for (var i = 0; i < 6; i++) {
-		averages.push(total[i] / numStudents[i]);
+		if (numStudents[i] !== 0) {
+			averages.push(total[i] / numStudents[i]);
+		}
 	}
 	console.log(averages);
 	return averages;
