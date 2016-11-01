@@ -6,7 +6,7 @@ var dataset = [],
 	yAxis,
 	avgAlcConsumption,
 	showingDalcAndWalc = false,
-	showingParents = false;
+	showingParents = false,
 	avgAlcLine;
 
 d3.csv("student-por.csv", function(error, data) {
@@ -58,6 +58,18 @@ function createVis(avgAlcConsumption) {
 	svgLine.append("path")
 	  .attr("class", "line")
 	  .attr("d", avgAlcLine(avgAlcConsumption));
+
+  	svgLine.append("g")
+  			.attr("class", "linePoint")
+  			.append("circle")
+  			.attr("cx", function(d, i) {
+  				return xScale(i + 15);
+  			})
+  			.attr("cy", function(d) {
+  				return yScale(d);
+  			})
+  			.attr("r", 3.5)
+  			.style("fill", "red");
 
   	svgLine.append("text")
   		.attr("transform", function(d, i) {
@@ -228,7 +240,7 @@ function calculateAvgOf(attribute) {
 	for (var i = 0; i < dataset.length; i++) {
 		var alcConsumption = Number(dataset[i][attribute]);
 
-		 var ageIndex = Number(dataset[i]["age"]) - 15;
+		 var ageIndex = Number(dataset[i].age) - 15;
 
 		 total[ageIndex] += alcConsumption;
 		 numStudents[ageIndex]++;
