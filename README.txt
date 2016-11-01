@@ -6,8 +6,11 @@ What has been done so far:
 -Loaded data into js
 -Built and ran function for creating a JSON object that can be used as the backend for the tree visualization (this is done once, and then saved in ‘treeData.js’
 -Constructed the tree visualization based on the JSON object
+-Constructed basic line graph
+-Added toggle that adds two other lines to visualization with transition
 
 Files:
 gordon_jelin_project1.html	// the main html where the visualizations will live
 js/treeVis.js			// the js for creating the tree visualization
 js/treeData.js			// the js for the tree’s JSON object
+js/lineVis.js			// the js for creating the line graph visualization
