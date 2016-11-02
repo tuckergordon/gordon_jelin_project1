@@ -14,9 +14,9 @@ body #radioContainer {
   text-align: left;
 }
 
-.checkboxText {
+.radioText {
   font-family: sans-serif;
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .title {
@@ -73,7 +73,7 @@ path.link {
   stroke-width: 3px;
 }
 
-.linePoint, .dalcWalcLinePoint {
+.linePoint, .dalcWalcLinePoint, .weeklyLinePoint {
   fill: steelblue;
 }
 

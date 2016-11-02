@@ -65,63 +65,65 @@ function createVis(avgAlcConsumption) {
 	  .attr("class", "line")
 	  .attr("d", avgAlcLine(avgAlcConsumption));
 
-	// add points to the line
-  	svgLine.selectAll("linePoint")
-  			.data(avgAlcConsumption)
-  			.enter().append("circle")
-  			.attr("cx", function(d, i) {
-  				return xScale(i + 15);
-  			})
-  			.attr("cy", function(d) {
-  				return yScale(d);
-  			})
-  			.attr("r", pointRadius)
-  			.attr("class", "linePoint")
-  				// show tooltip on hover
-			   .on("mouseover", function(d) {
-			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
-			   					parseFloat(d3.select(this).attr("cy")));
-			   })
-			   // hide tooltip otherwise
-			   .on("mouseout", function() {
-					d3.select("#tooltip").classed("hidden", true);
+  	addPointsToLine(avgAlcConsumption, "weekly");
+
+	// // add points to the line
+ //  	svgLine.selectAll("linePoint")
+ //  			.data(avgAlcConsumption)
+ //  			.enter().append("circle")
+ //  			.attr("cx", function(d, i) {
+ //  				return xScale(i + 15);
+ //  			})
+ //  			.attr("cy", function(d) {
+ //  				return yScale(d);
+ //  			})
+ //  			.attr("r", pointRadius)
+ //  			.attr("class", "linePoint")
+ //  				// show tooltip on hover
+	// 		   .on("mouseover", function(d) {
+	// 		   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
+	// 		   					parseFloat(d3.select(this).attr("cy")));
+	// 		   })
+	// 		   // hide tooltip otherwise
+	// 		   .on("mouseout", function() {
+	// 				d3.select("#tooltip").classed("hidden", true);
 					
-			   });
+	// 		   });
 
   	svgLine.append("text")
   		.attr("transform", function(d, i) {
   			return "translate(" + xScale(avgAlcConsumption.length -1 + 15) + ","
 								+ yScale(avgAlcConsumption[avgAlcConsumption.length-1]) + ")";
 		})
-  		.attr("x", 3)
+  		.attr("x", 6)
   		.attr("dy", "0.3em")
   		.text("Weekly Average");
 
 	// Appending the axes
 	svgLine.append("g")
-	      .attr("class", "axis axis--x")
-	      .attr("transform", "translate(0," + height + ")")
-	      .call(xAxis);
+		      .attr("class", "axis axis--x")
+		      .attr("transform", "translate(0," + height + ")")
+		      .call(xAxis);
 
 	svgLine.append("g")
-	  .attr("class", "axis axis--y")
-	  .call(yAxis);
+			  .attr("class", "axis axis--y")
+			  .call(yAxis);
 
 	svgLine.append("text")
-	  .attr("fill", "#000")
-	  .attr("transform", "rotate(-90)")
-	  .attr("y", 6)
-	  .attr("dy", "0.71em")
-	  .style("text-anchor", "end")
-	  .text("Avg. Weekly Alcohol Consumption");
+			  .attr("fill", "#000")
+			  .attr("transform", "rotate(-90)")
+			  .attr("y", 6)
+			  .attr("dy", "0.71em")
+			  .style("text-anchor", "end")
+			  .text("Avg. Weekly Alcohol Consumption");
 
-	  svgLine.append("text")
-		  .attr("fill", "#000")
-		  .attr("x", width)
-		  .attr("y", height - 12)
-		  .attr("dy", "0.71em")
-		  .style("text-anchor", "end")
-		  .text("Age");
+	svgLine.append("text")
+			  .attr("fill", "#000")
+			  .attr("x", width)
+			  .attr("y", height - 12)
+			  .attr("dy", "0.71em")
+			  .style("text-anchor", "end")
+			  .text("Age");
 }
 
 function showTooltip(d, cx, cy) {
@@ -148,20 +150,40 @@ function showTooltip(d, cx, cy) {
 
 // http://stackoverflow.com/questions/17732704/how-to-make-the-checkbox-unchecked-by-default-always
 // ensures that the radio buttons start unchecked
-// function uncheck() {
-// 	$("input:radio:checked").prop('checked', false);
-// }
-
-function toggleLines() {
-	var checkedRadio = $("input:radio:checked");
+function defaultCheck() {
+	$("#radioWeekly").prop('checked', true);
 }
 
-function toggleWalcAndDalc() {
+function toggleLines() {
+	var checkedRadio = $("input:radio:checked")[0].id;
+	switch (checkedRadio) {
+		case "radioWeekly":
+			if(showingDalcAndWalc) hideDalcAndWalc();
+			showingDalcAndWalc = false;
+			if(showingParents) hideParents();
+			showingParents = false;
+			break;
+		case "radioWeeks":
+			showDalcAndWalc();
+			showingDalcAndWalc = true;
+			if(showingParents) hideParents();
+			showingParents = false;
+			break;
+		case "radioParents":
+			if(showingDalcAndWalc) hideDalcAndWalc();
+			showingDalcAndWalc = false;
+			showParents();
+			showingDalcAndWalc = true;
+			break;
+	}
+}
+
+function toggleDalcAndWalc() {
 	if (showingDalcAndWalc) {
-		hideWalcAndDalc();
+		hideDalcAndWalc();
 		showingDalcAndWalc = false;
 	} else {
-		showWalcAndDalc();
+		showDalcAndWalc();
 		showingDalcAndWalc = true;
 	}
 }
@@ -176,7 +198,7 @@ function toggleParents() {
 	}
 }
 
-function showWalcAndDalc() {
+function showDalcAndWalc() {
 
 	var avgDalcConsumption = calculateAvgOf("Dalc"),
 		avgWalcConsumption = calculateAvgOf("Walc");
@@ -190,33 +212,7 @@ function showWalcAndDalc() {
 		  .attr("d", avgAlcLine(avgDalcConsumption));
 
   	// add points to the line
-  	svgLine.selectAll("linePoint")
-  			.data(avgDalcConsumption)
-  			.enter().append("circle")
-  			.attr("r", pointRadius)
-  			.attr("class", "linePoint")
-  			.attr("class", "dalcWalcLinePoint")
-  			// hover functionality
-			   .on("mouseover", function(d) {
-			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
-			   					parseFloat(d3.select(this).attr("cy")));
-			   })
-			   .on("mouseout", function() {
-					//Hide the tooltip
-					d3.select("#tooltip").classed("hidden", true);
-					
-		   		})
-  			.attr("cx", function(d, i) {
-  				return xScale(i + 15);
-  			})
-  			.attr("cy", function(d) {
-  				return yScale(d);
-  			})
-  			.attr("visibility", "hidden")
-			.transition()
-			.delay(1000)
-	  		.attr("visibility", "visible");
-  				
+  	addPointsToLine(avgDalcConsumption, "dalcWalc");			
 
   	svgLine.append("text")
   		.attr("class", "dalcWalcLabel")
@@ -224,7 +220,7 @@ function showWalcAndDalc() {
   			return "translate(" + xScale(avgDalcConsumption.length -1 + 15) + ","
 								+ yScale(avgDalcConsumption[avgDalcConsumption.length-1]) + ")";
 		})
-		.attr("x", 3)
+		.attr("x", 6)
   		.attr("dy", "0.3em")
   		.text("Workday Average")
   		.attr("visibility", "hidden")
@@ -241,34 +237,7 @@ function showWalcAndDalc() {
 	  .duration(1000)
 	  .attr("d", avgAlcLine(avgWalcConsumption));
 
-  	// add points to the line
-  	svgLine.selectAll("linePoint")
-  			.data(avgWalcConsumption)
-  			.enter().append("circle")
-  			.attr("r", pointRadius)
-  			.attr("class", "linePoint")
-  			.attr("class", "dalcWalcLinePoint")
-  			// hover functionality
-			   .on("mouseover", function(d) {
-			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
-			   					parseFloat(d3.select(this).attr("cy")));
-			   })
-			   .on("mouseout", function() {
-					//Hide the tooltip
-					d3.select("#tooltip").classed("hidden", true);
-					
-		   		})
-		   	.attr("cx", function(d, i) {
-  				return xScale(i + 15);
-  			})
-  			.attr("cy", function(d) {
-  				return yScale(d);
-  			})
-  			.attr("visibility", "hidden")
-			.transition()
-			.delay(1000)
-	  		.attr("visibility", "visible");
-  			
+  	addPointsToLine(avgWalcConsumption, "dalcWalc");		
 
   	svgLine.append("text")
   		.attr("class", "dalcWalcLabel")
@@ -276,7 +245,7 @@ function showWalcAndDalc() {
   			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
 								+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
 		})
-		.attr("x", 3)
+		.attr("x", 6)
   		.attr("dy", "0.3em")
   		.text("Weekend Average")
   		.attr("visibility", "hidden")
@@ -285,7 +254,7 @@ function showWalcAndDalc() {
   		.attr("visibility", "visible");
 }
 
-function hideWalcAndDalc() {
+function hideDalcAndWalc() {
 	svgLine.selectAll(".dalcWalcLabel")
 			.transition()
 			.remove();
@@ -309,25 +278,94 @@ function hideWalcAndDalc() {
 
 function showParents () {
 
-	var avgParentsTogetherAlcConsumption = calculateParentsTogetherAvg();
-	avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
-	avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
+	var avgParentsTogetherAlcConsumption  = calculateParentsTogetherAvg(),
+		avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother"),
+		avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
 
 	svgLine.append("path")
-		  .attr("class", "line")
-		  .attr("id", "avgParentsTogetherLine")
-		  .attr("d", avgAlcLine(avgAlcConsumption))
-		  .transition()
-		  .duration(1000)
-		  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));
+			  .attr("class", "line")
+			  .attr("id", "avgParentsTogetherLine")
+			  .attr("d", avgAlcLine(avgAlcConsumption))
+			  .transition()
+			  .duration(1000)
+			  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));
 
   	// add points to the line
-  	svgLine.selectAll("linePoint")
-  			.data(avgParentsTogetherAlcConsumption)
+  	addPointsToLine(avgParentsTogetherAlcConsumption, "parents");	
+
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) {
+  			return "translate(" + xScale(avgParentsTogetherAlcConsumption.length -1 + 15) + ","
+								+ yScale(avgParentsTogetherAlcConsumption[avgParentsTogetherAlcConsumption.length-1]) + ")";
+		})
+		.attr("x", 6)
+  		.attr("dy", "0.3em")
+  		.text("Average Alcohol Consumption Parents Together")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
+  			
+	svgLine.append("path")
+	  .attr("class", "line")
+	  .attr("id", "avgParentsSepMotherLine")
+	  .attr("d", avgAlcLine(avgAlcConsumption))
+	  .transition()
+	  .duration(1000)
+	  .attr("d", avgAlcLine(avgParentsSepMotherAlcConsumption));
+
+  	addPointsToLine(avgParentsSepMotherAlcConsumption, "parents");
+
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) { 
+  			return "translate(" + xScale(avgParentsSepMotherAlcConsumption.length -1 + 15) + ","
+								+ yScale(avgParentsSepMotherAlcConsumption[avgParentsSepMotherAlcConsumption.length-1]) + ")";
+		})
+		.attr("x", 6)
+  		.attr("dy", "0.3em")
+  		.text("Parents Separated, Mother is Gaurdian")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
+
+	svgLine.append("path")
+	  .attr("class", "line")
+	  .attr("id", "avgParentsSepFatherLine")
+	  .attr("d", avgAlcLine(avgAlcConsumption))
+	  .transition()
+	  .duration(1000)
+	  .attr("d", avgAlcLine(avgParentsSepFatherAlcConsumption));
+
+  	addPointsToLine(avgParentsSepFatherAlcConsumption, "parents");
+
+  	svgLine.append("text")
+  		.attr("class", "parentsLabel")
+  		.attr("transform", function(d, i) { 
+  			return "translate(" + xScale(avgParentsSepFatherAlcConsumption.length -1 + 15) + ","
+								+ (yScale(avgParentsSepFatherAlcConsumption[avgParentsSepFatherAlcConsumption.length-1])-15) + ")";
+		})
+		.attr("x", 6)
+  		.attr("dy", "0.3em")
+  		.text("Parents Separated, Father is Guardian")
+  		.attr("visibility", "hidden")
+		.transition()
+		.delay(1000)
+  		.attr("visibility", "visible");
+
+}
+
+// linetype should be "weekly", "dalcWalc" or "parents"
+function addPointsToLine(lineData, lineType) {
+	lineType += "LinePoint";
+	svgLine.selectAll("linePoint")
+  			.data(lineData)
   			.enter().append("circle")
   			.attr("r", pointRadius)
-  			.attr("class", "linePoint")
-  			.attr("class", "parentsTogetherLinePoint")
+  			 // .attr("class", "linePoint")
+  			.attr("class", lineType)
   			// hover functionality
 			   .on("mouseover", function(d) {
 			   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
@@ -347,66 +385,7 @@ function showParents () {
   			.attr("visibility", "hidden")
 			.transition()
 			.delay(1000)
-	  		.attr("visibility", "visible");		
-
-  	svgLine.append("text")
-  		.attr("class", "parentsLabel")
-  		.attr("transform", function(d, i) {
-  			return "translate(" + xScale(avgParentsTogetherAlcConsumption.length -1 + 15) + ","
-								+ yScale(avgParentsTogetherAlcConsumption[avgParentsTogetherAlcConsumption.length-1]) + ")";
-		})
-		.attr("x", 3)
-  		.attr("dy", "0.3em")
-  		.text("Average Alcohol Consumption Parents Together")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
-  			
-	svgLine.append("path")
-	  .attr("class", "line")
-	  .attr("id", "avgParentsSepMotherLine")
-	  .attr("d", avgAlcLine(avgAlcConsumption))
-	  .transition()
-	  .duration(1000)
-	  .attr("d", avgAlcLine(avgParentsSepMotherAlcConsumption));
-
-  	svgLine.append("text")
-  		.attr("class", "parentsLabel")
-  		.attr("transform", function(d, i) { 
-  			return "translate(" + xScale(avgParentsSepMotherAlcConsumption.length -1 + 15) + ","
-								+ yScale(avgParentsSepMotherAlcConsumption[avgParentsSepMotherAlcConsumption.length-1]) + ")";
-		})
-		.attr("x", 3)
-  		.attr("dy", "0.3em")
-  		.text("Parents Separated, Mother is Gaurdian")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
-
-	svgLine.append("path")
-	  .attr("class", "line")
-	  .attr("id", "avgParentsSepFatherLine")
-	  .attr("d", avgAlcLine(avgAlcConsumption))
-	  .transition()
-	  .duration(1000)
-	  .attr("d", avgAlcLine(avgParentsSepFatherAlcConsumption));
-
-  	svgLine.append("text")
-  		.attr("class", "parentsLabel")
-  		.attr("transform", function(d, i) { 
-  			return "translate(" + xScale(avgParentsSepFatherAlcConsumption.length -1 + 15) + ","
-								+ (yScale(avgParentsSepFatherAlcConsumption[avgParentsSepFatherAlcConsumption.length-1])-15) + ")";
-		})
-		.attr("x", 3)
-  		.attr("dy", "0.3em")
-  		.text("Parents Separated, Father is Guardian")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
-
+	  		.attr("visibility", "visible");	
 }
 
 function hideParents () {

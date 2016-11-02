@@ -8,7 +8,7 @@
         <script type="text/javascript" src="js/treeData.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
-    <body onload="uncheck()">
+    <body onload="defaultCheck()">
     	<div class="headerContainer">
 			<h1>
 				Project 1
@@ -29,15 +29,16 @@
     	<!-- External file for each visualization -->
         <script type="text/javascript" src="js/lineVis.js"></script>
         <div id="radioContainer">
-            <input type="radio" name="radioToggle" class="radioToggle" checked="checked" onchange="toggleLines()">
+        <h3>Select data to visualize:</h3>
+            <input type="radio" name="radioToggle" id="radioWeekly" class="radioToggle" checked="checked" onchange="toggleLines()">
                 <span class="radioText">Weekly Average</span>
             </input>
             <br>
-            <input type="radio" name="radioToggle" class="radioToggle" onchange="toggleLines()">
+            <input type="radio" name="radioToggle" id="radioWeeks" class="radioToggle" onchange="toggleLines()">
                 <span class="radioText">Weekend and weekday averages</span>
             </input>
             <br>
-            <input type="radio" name="radioToggle" class="radioToggle" onchange="toggleLines()">
+            <input type="radio" name="radioToggle" id="radioParents" class="radioToggle" onchange="toggleLines()">
                 <span class="radioText">Weekly averages based on parental situation</span>
             </input>
         </div>
