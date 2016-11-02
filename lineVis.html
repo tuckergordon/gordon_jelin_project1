@@ -2,16 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Project 1</title>
+        <title>Project 1: Line Graph</title>
         <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/treeData.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body onload="defaultCheck()">
     	<div class="headerContainer">
 			<h1>
-				Project 1
+				Project 1: Line Graph
 			</h1>
 			<h3>
 				James Jelin and Tucker Gordon
@@ -24,9 +23,6 @@
 
         <div id="tooltip" class="hidden"><p id="value"></p></div>
 
-		<!-- use d3 legend -->
-    	<script type="text/javascript" src="js/d3.legend.js"></script>
-    	<!-- External file for each visualization -->
         <script type="text/javascript" src="js/lineVis.js"></script>
         <div id="radioContainer">
         <h3>Select data to visualize:</h3>
@@ -34,7 +30,7 @@
                 <span class="radioText">Weekly Average</span>
             </input>
             <br>
-            <input type="radio" name="radioToggle" id="radioWeeks" class="radioToggle" onchange="toggleLines()">
+            <input type="radio" name="radioToggle" id="radioDalcWalc" class="radioToggle" onchange="toggleLines()">
                 <span class="radioText">Weekend and weekday averages</span>
             </input>
             <br>
@@ -42,8 +38,5 @@
                 <span class="radioText">Weekly averages based on parental situation</span>
             </input>
         </div>
-        <!-- <script type="text/javascript" src="js/treeVis.js"></script> -->
-        
-        
     </body>
 </html>

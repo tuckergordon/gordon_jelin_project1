@@ -1,18 +1,24 @@
+// James Jelin and Tucker Gordon
+// Project 1
+// lineVis.js
+// Includes all of the D3 script for creating the line graph visualization
+
 var dataset = [],
-	svgLine,
+	svgLine,							// the svg element
 	margin,
 	width,
 	height,
 	xAxis,
 	yAxis,
-	avgAlcConsumption,
-	avgParentsSepMotherAlcConsumption,
-	avgParentsSepFatherAlcConsumption,
-	showingDalcAndWalc = false,
-	showingParents = false,
-	avgAlcLine,
+	avgAlcConsumption,					// array w/ avg weekly alc consumption
+	avgParentsSepMotherAlcConsumption,	// array w/ avg weekly alc (sep parents, father = guardian)
+	avgParentsSepFatherAlcConsumption,	// array w/ avg weekly alc (sep parents, mother = guardian)
+	showingDalcAndWalc = false,			// dalc and walc consumption lines showing
+	showingParents = false,				// parent consumption lines showing
+	avgAlcLine,							// general D3 line object for creating all lines
 	pointRadius = 5;
 
+// loading in data from csv
 d3.csv("student-por.csv", function(error, data) {
 	dataset = data;         // copy to dataset
 
@@ -21,12 +27,14 @@ d3.csv("student-por.csv", function(error, data) {
 		console.log(error);
     }
     else {
+    	// calculate weekly averages based on age
 		avgAlcConsumption = calculateAvgAlcConsumption();
-
+		// create initial visualization
 		createVis(avgAlcConsumption);
     }
 });
 
+// create the initial visualization based on the weekly averages
 function createVis(avgAlcConsumption) {
 	margin = {top: 20, right: 200, bottom: 30, left: 50};
     width = 960 - margin.left - margin.right;
@@ -35,8 +43,8 @@ function createVis(avgAlcConsumption) {
 	xScale = d3.scale.linear().range([0, width]);
 	yScale = d3.scale.linear().range([height, 0]);
 
-	xScale.domain([15, 20]);
-	yScale.domain([0, 5]);
+	xScale.domain([15, 20]);	// the ages we're dealing with
+	yScale.domain([1, 5]);		// alc consumption is on a scale 1-5
 
 	xAxis = d3.svg.axis()
 					.scale(xScale)
@@ -46,69 +54,64 @@ function createVis(avgAlcConsumption) {
 	yAxis = d3.svg.axis()
 					.scale(yScale)
 					.orient("left")
-					.ticks(6);
+					.ticks(5);
 
+	// initializing the svg element
 	svgLine = d3.select("body")
 				.append("svg")
-					.attr("width", width + margin.left + margin.right)
-					.attr("height", height + margin.top + margin.bottom)
-					.attr("id", "svgLine")
+				// compensate for width/height not including margins
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.attr("id", "svgLine")
 				.append("g")
-					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+	// avgAlcLine is a general D3 line element that we will use to create
+	// all of our lines. Whenever we call it, we can give it a dataset to use
+	// (assuming it's a 1D array), and it will build the line. This is possible
+	// because all of the lines have the same x coordinates and y scale
 	avgAlcLine = d3.svg.line()
+							// function for all of the x,y values of the path
+							// "i+15" because i is 0-5 and our ages are 15-20
 							.x(function(d, i) { return xScale(i + 15); })
 							.y(function(d) { return yScale(d); });
 
-	// add the line
+	// add the weekly averages line
 	svgLine.append("path")
 	  .attr("class", "line")
+	  // this line uses the avgAlcConsumption calculated earlier as its dataset
 	  .attr("d", avgAlcLine(avgAlcConsumption));
 
   	addPointsToLine(avgAlcConsumption, "weekly");
 
-	// // add points to the line
- //  	svgLine.selectAll("linePoint")
- //  			.data(avgAlcConsumption)
- //  			.enter().append("circle")
- //  			.attr("cx", function(d, i) {
- //  				return xScale(i + 15);
- //  			})
- //  			.attr("cy", function(d) {
- //  				return yScale(d);
- //  			})
- //  			.attr("r", pointRadius)
- //  			.attr("class", "linePoint")
- //  				// show tooltip on hover
-	// 		   .on("mouseover", function(d) {
-	// 		   		showTooltip(d, parseFloat(d3.select(this).attr("cx")), 
-	// 		   					parseFloat(d3.select(this).attr("cy")));
-	// 		   })
-	// 		   // hide tooltip otherwise
-	// 		   .on("mouseout", function() {
-	// 				d3.select("#tooltip").classed("hidden", true);
-					
-	// 		   });
+  	addLabelToLine(avgAlcConsumption, "Weekly Average", "weeklyLabel");
 
-  	svgLine.append("text")
-  		.attr("transform", function(d, i) {
-  			return "translate(" + xScale(avgAlcConsumption.length -1 + 15) + ","
-								+ yScale(avgAlcConsumption[avgAlcConsumption.length-1]) + ")";
-		})
-  		.attr("x", 6)
-  		.attr("dy", "0.3em")
-  		.text("Weekly Average");
+	addAxes();
+}
 
-	// Appending the axes
+// append the axes to the svg
+function addAxes() {
+	// x axis
 	svgLine.append("g")
-		      .attr("class", "axis axis--x")
+		      .attr("class", "axis")
 		      .attr("transform", "translate(0," + height + ")")
 		      .call(xAxis);
 
+  	// y axis
 	svgLine.append("g")
-			  .attr("class", "axis axis--y")
+			  .attr("class", "axis")
 			  .call(yAxis);
 
+  	// x axis label
+  	svgLine.append("text")
+			  .attr("fill", "#000")
+			  .attr("x", width)
+			  .attr("y", height - 12)
+			  .attr("dy", "0.71em")
+			  .style("text-anchor", "end")
+			  .text("Age");
+
+  	// y axis label
 	svgLine.append("text")
 			  .attr("fill", "#000")
 			  .attr("transform", "rotate(-90)")
@@ -116,24 +119,19 @@ function createVis(avgAlcConsumption) {
 			  .attr("dy", "0.71em")
 			  .style("text-anchor", "end")
 			  .text("Avg. Weekly Alcohol Consumption");
-
-	svgLine.append("text")
-			  .attr("fill", "#000")
-			  .attr("x", width)
-			  .attr("y", height - 12)
-			  .attr("dy", "0.71em")
-			  .style("text-anchor", "end")
-			  .text("Age");
 }
 
+// display the tool tip at a specified location with given data
 function showTooltip(d, cx, cy) {
-	//Get this point's x/y values, then augment for the tooltip
+	// Get this point's x/y values, then augment for the tooltip
+	// the scrollX/scrollY are there because the location changes based on the viewport
 	var xPosition = document.getElementById("svgLine").getBoundingClientRect().left +
 					window.scrollX + cx + margin.left;
 
 	var yPosition = document.getElementById("svgLine").getBoundingClientRect().top + 
 					window.scrollY + cy + margin.top;
 
+	// rounding to 1 decimal place to dispaly alc. consumption
 	var tooltipText = (Math.round(d * 100) / 100) + " / 5";
 
 	var tooltip = d3.select("#tooltip");
@@ -148,110 +146,59 @@ function showTooltip(d, cx, cy) {
 	tooltip.classed("hidden", false);
 }
 
+// Ensures that the "Weekly Average" radio button starts checked
+// Adopted from: 
 // http://stackoverflow.com/questions/17732704/how-to-make-the-checkbox-unchecked-by-default-always
-// ensures that the radio buttons start unchecked
 function defaultCheck() {
 	$("#radioWeekly").prop('checked', true);
 }
 
+// toggle which lines are displayed based on the selected radio buttons
 function toggleLines() {
+	// get the id of the selected radio button
 	var checkedRadio = $("input:radio:checked")[0].id;
 	switch (checkedRadio) {
+		// show only the weekly average line
 		case "radioWeekly":
 			if(showingDalcAndWalc) hideDalcAndWalc();
 			showingDalcAndWalc = false;
 			if(showingParents) hideParents();
 			showingParents = false;
 			break;
-		case "radioWeeks":
+		// show weekly average line and Dalc and Walc lines
+		case "radioDalcWalc":
 			showDalcAndWalc();
 			showingDalcAndWalc = true;
 			if(showingParents) hideParents();
 			showingParents = false;
 			break;
+		// show weekly average line and the parent lines
 		case "radioParents":
 			if(showingDalcAndWalc) hideDalcAndWalc();
 			showingDalcAndWalc = false;
 			showParents();
-			showingDalcAndWalc = true;
+			showingParents = true;
 			break;
 	}
 }
 
-function toggleDalcAndWalc() {
-	if (showingDalcAndWalc) {
-		hideDalcAndWalc();
-		showingDalcAndWalc = false;
-	} else {
-		showDalcAndWalc();
-		showingDalcAndWalc = true;
-	}
-}
-
-function toggleParents() {
-	if (showingParents) {
-		hideParents();
-		showingParents = false;
-	} else {
-		showParents();
-		showingParents = true;
-	}
-}
-
+// show the Dalc and Walc lines
 function showDalcAndWalc() {
 
+	// calculate the average workday and weekend alcohol consumption 
+	// arrays for each age
 	var avgDalcConsumption = calculateAvgOf("Dalc"),
 		avgWalcConsumption = calculateAvgOf("Walc");
 
-	svgLine.append("path")
-		  .attr("class", "line")
-		  .attr("id", "avgDalcLine")
-		  .attr("d", avgAlcLine(avgAlcConsumption))
-		  .transition()
-		  .duration(1000)
-		  .attr("d", avgAlcLine(avgDalcConsumption));
-
-  	// add points to the line
+	// we give "dalcWalcLabel" to both lines because it will be assigned as
+	// as class to each of them so that we can remove them together
+	showLine(avgDalcConsumption, "avgDalcLine");
   	addPointsToLine(avgDalcConsumption, "dalcWalc");			
+  	addLabelToLine(avgDalcConsumption, "Workday Average", "dalcWalcLabel");
 
-  	svgLine.append("text")
-  		.attr("class", "dalcWalcLabel")
-  		.attr("transform", function(d, i) {
-  			return "translate(" + xScale(avgDalcConsumption.length -1 + 15) + ","
-								+ yScale(avgDalcConsumption[avgDalcConsumption.length-1]) + ")";
-		})
-		.attr("x", 6)
-  		.attr("dy", "0.3em")
-  		.text("Workday Average")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
-  			
-
-	svgLine.append("path")
-	  .attr("class", "line")
-	  .attr("id", "avgWalcLine")
-	  .attr("d", avgAlcLine(avgAlcConsumption))
-	  .transition()
-	  .duration(1000)
-	  .attr("d", avgAlcLine(avgWalcConsumption));
-
-  	addPointsToLine(avgWalcConsumption, "dalcWalc");		
-
-  	svgLine.append("text")
-  		.attr("class", "dalcWalcLabel")
-  		.attr("transform", function(d, i) {
-  			return "translate(" + xScale(avgWalcConsumption.length -1 + 15) + ","
-								+ yScale(avgWalcConsumption[avgWalcConsumption.length-1]) + ")";
-		})
-		.attr("x", 6)
-  		.attr("dy", "0.3em")
-  		.text("Weekend Average")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
+  	showLine(avgWalcConsumption, "avgWalcLine");
+  	addPointsToLine(avgWalcConsumption, "dalcWalc");			
+  	addLabelToLine(avgWalcConsumption, "Weekend Average", "dalcWalcLabel");
 }
 
 function hideDalcAndWalc() {
@@ -273,55 +220,29 @@ function hideDalcAndWalc() {
 			.duration(1000)
 			.attr("d", avgAlcLine(avgAlcConsumption))
 			.remove();
-
 }
 
 function showParents () {
 
-	var avgParentsTogetherAlcConsumption  = calculateParentsTogetherAvg(),
-		avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother"),
-		avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
+	var avgParentsTogetherAlcConsumption  = calculateParentsTogetherAvg();
+	avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
+	avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
 
-	svgLine.append("path")
-			  .attr("class", "line")
-			  .attr("id", "avgParentsTogetherLine")
-			  .attr("d", avgAlcLine(avgAlcConsumption))
-			  .transition()
-			  .duration(1000)
-			  .attr("d", avgAlcLine(avgParentsTogetherAlcConsumption));
-
-  	// add points to the line
+	showLine(avgParentsTogetherAlcConsumption, "avgParentsTogetherLine");
   	addPointsToLine(avgParentsTogetherAlcConsumption, "parents");	
+  	addLabelToLine(avgParentsTogetherAlcConsumption, "Parents Together", "parentsLabel");
 
-  	svgLine.append("text")
-  		.attr("class", "parentsLabel")
-  		.attr("transform", function(d, i) {
-  			return "translate(" + xScale(avgParentsTogetherAlcConsumption.length -1 + 15) + ","
-								+ yScale(avgParentsTogetherAlcConsumption[avgParentsTogetherAlcConsumption.length-1]) + ")";
-		})
-		.attr("x", 6)
-  		.attr("dy", "0.3em")
-  		.text("Average Alcohol Consumption Parents Together")
-  		.attr("visibility", "hidden")
-		.transition()
-		.delay(1000)
-  		.attr("visibility", "visible");
-  			
-	svgLine.append("path")
-	  .attr("class", "line")
-	  .attr("id", "avgParentsSepMotherLine")
-	  .attr("d", avgAlcLine(avgAlcConsumption))
-	  .transition()
-	  .duration(1000)
-	  .attr("d", avgAlcLine(avgParentsSepMotherAlcConsumption));
+  	showLine(avgParentsSepMotherAlcConsumption, "avgParentsSepMotherLine");
+  	addPointsToLine(avgParentsSepMotherAlcConsumption, "parents");	
 
-  	addPointsToLine(avgParentsSepMotherAlcConsumption, "parents");
-
+  	// not using function we have for this because we need to make a slight adjustment
+  	// to the position of the label
   	svgLine.append("text")
   		.attr("class", "parentsLabel")
   		.attr("transform", function(d, i) { 
-  			return "translate(" + xScale(avgParentsSepMotherAlcConsumption.length -1 + 15) + ","
-								+ yScale(avgParentsSepMotherAlcConsumption[avgParentsSepMotherAlcConsumption.length-1]) + ")";
+  			return "translate(" + (xScale(avgParentsSepMotherAlcConsumption.length -1 + 15) - 20) + ","
+								+ (yScale(avgParentsSepMotherAlcConsumption[
+									avgParentsSepMotherAlcConsumption.length-1]) - 25) + ")";
 		})
 		.attr("x", 6)
   		.attr("dy", "0.3em")
@@ -331,16 +252,11 @@ function showParents () {
 		.delay(1000)
   		.attr("visibility", "visible");
 
-	svgLine.append("path")
-	  .attr("class", "line")
-	  .attr("id", "avgParentsSepFatherLine")
-	  .attr("d", avgAlcLine(avgAlcConsumption))
-	  .transition()
-	  .duration(1000)
-	  .attr("d", avgAlcLine(avgParentsSepFatherAlcConsumption));
+	showLine(avgParentsSepFatherAlcConsumption, "avgParentsSepFatherLine");
+  	addPointsToLine(avgParentsSepFatherAlcConsumption, "parents");	
 
-  	addPointsToLine(avgParentsSepFatherAlcConsumption, "parents");
-
+  	// not using function we have for this because we need to make a slight adjustment
+  	// to the position of the label
   	svgLine.append("text")
   		.attr("class", "parentsLabel")
   		.attr("transform", function(d, i) { 
@@ -354,11 +270,59 @@ function showParents () {
 		.transition()
 		.delay(1000)
   		.attr("visibility", "visible");
+}
 
+function hideParents () {
+	svgLine.selectAll(".parentsLabel")
+			.transition()
+			.remove();
+
+	svgLine.selectAll(".parentsLinePoint")
+			.transition()
+			.remove();
+
+	var sepMotherTrimmedAvgAlcConsumption = [],
+		sepFatherTrimmedAvgAlcConsumption = [];
+
+	
+	for (var i = 0; i < avgParentsSepMotherAlcConsumption.length; i++) {
+		sepMotherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
+	}	
+
+	for (var i = 0; i < avgParentsSepFatherAlcConsumption.length; i++) {
+		sepFatherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
+	}		
+
+	svgLine.select("#avgParentsTogetherLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(avgAlcConsumption))
+			.remove();
+	svgLine.select("#avgParentsSepMotherLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(sepMotherTrimmedAvgAlcConsumption))
+			.remove();
+	svgLine.select("#avgParentsSepFatherLine")
+			.transition()
+			.duration(1000)
+			.attr("d", avgAlcLine(sepFatherTrimmedAvgAlcConsumption))
+			.remove();
+}
+
+function showLine(lineData, lineID) {
+	svgLine.append("path")
+		   .attr("class", "line")
+		   .attr("id", lineID)
+		   .attr("d", avgAlcLine(avgAlcConsumption))
+		   .transition()
+		   .duration(1000)
+		   .attr("d", avgAlcLine(lineData));
 }
 
 // linetype should be "weekly", "dalcWalc" or "parents"
 function addPointsToLine(lineData, lineType) {
+	var delay = (lineType == "weekly") ? 0 : 1000;
 	lineType += "LinePoint";
 	svgLine.selectAll("linePoint")
   			.data(lineData)
@@ -384,43 +348,25 @@ function addPointsToLine(lineData, lineType) {
   			})
   			.attr("visibility", "hidden")
 			.transition()
-			.delay(1000)
+			.delay(delay)
 	  		.attr("visibility", "visible");	
 }
 
-function hideParents () {
-	svgLine.selectAll(".parentsLabel")
+function addLabelToLine(lineData, label, className) {
+	var delay = (label == "Weekly Average") ? 0 : 1000;
+	svgLine.append("text")
+	  		.attr("class", className)
+	  		.attr("transform", function(d, i) {
+	  			return "translate(" + xScale(lineData.length -1 + 15) + ","
+									+ yScale(lineData[lineData.length-1]) + ")";
+			})
+			.attr("x", 6)
+	  		.attr("dy", "0.3em")
+	  		.text(label)
+	  		.attr("visibility", "hidden")
 			.transition()
-			.remove();
-
-	var sepMotherTrimmedAvgAlcConsumption = [];
-	var sepFatherTrimmedAvgAlcConsumption = [];
-
-	
-	for (var i = 0; i < avgParentsSepMotherAlcConsumption.length; i++) {
-				sepMotherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
-			}	
-
-	for (var i = 0; i < avgParentsSepFatherAlcConsumption.length; i++) {
-				sepFatherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
-			}		
-
-	svgLine.select("#avgParentsTogetherLine")
-			.transition()
-			.duration(1000)
-			.attr("d", avgAlcLine(avgAlcConsumption))
-			.remove();
-	svgLine.select("#avgParentsSepMotherLine")
-			.transition()
-			.duration(1000)
-			.attr("d", avgAlcLine(sepMotherTrimmedAvgAlcConsumption))
-			.remove();
-	svgLine.select("#avgParentsSepFatherLine")
-			.transition()
-			.duration(1000)
-			.attr("d", avgAlcLine(sepFatherTrimmedAvgAlcConsumption))
-			.remove();
-
+			.delay(delay)
+	  		.attr("visibility", "visible");
 }
 
 function calculateAvgAlcConsumption() {
@@ -484,7 +430,6 @@ function calculateParentsTogetherAvg() {
 	for (var i = 0; i < 6; i++) {
 		averages.push(total[i] / numStudents[i]);
 	}
-	console.log(averages);
 	return averages;
 }
 
@@ -516,6 +461,5 @@ function calculateParentsSepAvg(attribute) {
 			averages.push(total[i] / numStudents[i]);
 		}
 	}
-	console.log(averages);
 	return averages;
 }

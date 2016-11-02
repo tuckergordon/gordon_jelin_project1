@@ -73,11 +73,11 @@ path.link {
   stroke-width: 3px;
 }
 
-.linePoint, .dalcWalcLinePoint, .weeklyLinePoint {
-  fill: steelblue;
+.dalcWalcLinePoint, .weeklyLinePoint, .parentsLinePoint {
+  fill: black;
 }
 
-.linePoint:hover, .dalcWalcLinePoint:hover {
+.dalcWalcLinePoint:hover, .weeklyLinePoint:hover, .parentsLinePoint:hover {
   fill: orange;
   cursor: pointer;
 }
