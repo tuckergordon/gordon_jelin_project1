@@ -142,7 +142,6 @@ function showTooltip(d, cx, cy) {
 	//Update the tooltip position and value
 	tooltip.style("left", xPosition + "px")
 			.style("top", yPosition + "px")						
-			.select("#value")
 			.text(tooltipText);
 
 	//Show the tooltip
