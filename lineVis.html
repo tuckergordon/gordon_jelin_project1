@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <!-- James Jelin & Tucker Gordon -->
 <!-- Data Visualization Project 1 -->
 <!-- Line Visualization HTML -->
-<!DOCTYPE html>
+<!-- Validated by https://validator.w3.org/ -->
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -10,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
+    <!-- defaultCheck() will make sure that "Weekly Average" is checked whenever the page loads -->
     <body onload="defaultCheck()">
     	<div class="headerContainer">
 			<h1>
@@ -24,22 +26,25 @@
 		</div>
 		<div class="thinBar"></div>
 
+        <!-- Tooltip that will be made visible and repositioned when points are hovered on -->
         <div id="tooltip" class="hidden"><p id="value"></p></div>
-
+        <!-- Script for the visualization -->
         <script type="text/javascript" src="js/lineVis.js"></script>
+        
         <div id="radioContainer">
+        <!-- Radio buttons for selecting different lines to view
+             Each button calls toggleLines, but the different ids allow the function
+             to know which radio was selected. They all have the same name so that
+             only one can be selected at a time. The class is for styling-->
         <h3>Select data to visualize:</h3>
             <input type="radio" name="radioToggle" id="radioWeekly" class="radioToggle" checked="checked" onchange="toggleLines()">
-                <span class="radioText">Weekly Average</span>
-            </input>
+            <span class="radioText">Weekly Average</span>
             <br>
             <input type="radio" name="radioToggle" id="radioDalcWalc" class="radioToggle" onchange="toggleLines()">
-                <span class="radioText">Weekend and weekday averages</span>
-            </input>
+            <span class="radioText">Weekend and weekday averages</span>
             <br>
             <input type="radio" name="radioToggle" id="radioParents" class="radioToggle" onchange="toggleLines()">
-                <span class="radioText">Weekly averages based on parental situation</span>
-            </input>
+            <span class="radioText">Weekly averages based on parental situation</span>
         </div>
     </body>
 </html>
