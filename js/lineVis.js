@@ -34,6 +34,7 @@ d3.csv("student-por.csv", function(error, data) {
 });
 
 // create the initial visualization based on the weekly averages
+// avgAlcConsumption is the dataset for the weekly averages
 function createVis(avgAlcConsumption) {
 	margin = {top: 20, right: 200, bottom: 30, left: 50};
     width = 960 - margin.left - margin.right;
