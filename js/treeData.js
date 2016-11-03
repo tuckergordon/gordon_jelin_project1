@@ -1,3 +1,14 @@
+// James Jelin and Tucker Gordon
+// Project 1
+// treeData.js
+
+// This file is essentially a JSON file in .js format. It is constructed by the 
+// "generateTreeJSON()" function in treeVis.js, and var treeData is used
+// in treeVis.js directly.
+
+// An important thing to note here is the difference between "children" and "_children":
+// "children" start off displayed, while "_children" start off hidden. This is how we're able
+// to determine what is displayed originally.
 var treeData = [
   {
     "name": "Start",
