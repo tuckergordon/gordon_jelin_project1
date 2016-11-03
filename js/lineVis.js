@@ -4,17 +4,17 @@
 // Includes all of the D3 script for creating the line graph visualization
 
 var dataset = [],
-	svgLine,							// the svg element
+	svgLine,		// the svg element
 	margin,
 	width,
 	height,
 	xAxis,
 	yAxis,
 	avgAlcConsumption,					// array w/ avg weekly alc consumption
-	avgParentsSepMotherAlcConsumption,	// array w/ avg weekly alc (sep parents, father = guardian)
-	avgParentsSepFatherAlcConsumption,	// array w/ avg weekly alc (sep parents, mother = guardian)
-	showingDalcAndWalc = false,			// dalc and walc consumption lines showing
-	showingParents = false,				// parent consumption lines showing
+	avgParentsSepMotherAlcConsumption,	// avg weekly alc for sep parents, father = guardian)
+	avgParentsSepFatherAlcConsumption,	// avg weekly alc for sep parents, mother = guardian)
+	showingDalcAndWalc = false,			// true if dalc and walc consumption lines showing
+	showingParents = false,				// true if parent consumption lines showing
 	avgAlcLine,							// general D3 line object for creating all lines
 	pointRadius = 5;
 
@@ -29,7 +29,6 @@ d3.csv("student-por.csv", function(error, data) {
     else {
     	// calculate weekly averages based on age
 		avgAlcConsumption = calculateAvgAlcConsumption();
-		// create initial visualization
 		createVis(avgAlcConsumption);
     }
 });
@@ -49,14 +48,16 @@ function createVis(avgAlcConsumption) {
 	xAxis = d3.svg.axis()
 					.scale(xScale)
 					.orient("bottom")
+					// 6 ticks for ages 15-20
 					.ticks(6);
 
 	yAxis = d3.svg.axis()
 					.scale(yScale)
 					.orient("left")
+					// 5 ticks for alc consumption rates 1-5
 					.ticks(5);
 
-	// initializing the svg element
+	// initializes the svg element
 	svgLine = d3.select("body")
 				.append("svg")
 				// compensate for width/height not including margins
@@ -71,21 +72,19 @@ function createVis(avgAlcConsumption) {
 	// (assuming it's a 1D array), and it will build the line. This is possible
 	// because all of the lines have the same x coordinates and y scale
 	avgAlcLine = d3.svg.line()
-							// function for all of the x,y values of the path
-							// "i+15" because i is 0-5 and our ages are 15-20
+							// function for all of the x,y values of the path.
+							// We use "i+15" because i is 0-5 and our ages are 15-20
 							.x(function(d, i) { return xScale(i + 15); })
 							.y(function(d) { return yScale(d); });
 
 	// add the weekly averages line
 	svgLine.append("path")
 	  .attr("class", "line")
-	  // this line uses the avgAlcConsumption calculated earlier as its dataset
+	  // this line uses the avgAlcConsumption array calculated earlier as its dataset
 	  .attr("d", avgAlcLine(avgAlcConsumption));
 
   	addPointsToLine(avgAlcConsumption, "weekly");
-
   	addLabelToLine(avgAlcConsumption, "Weekly Average", "weeklyLabel");
-
 	addAxes();
 }
 
@@ -123,21 +122,25 @@ function addAxes() {
 
 // display the tool tip at a specified location with given data
 function showTooltip(d, cx, cy) {
-	// Get this point's x/y values, then augment for the tooltip
 	// the scrollX/scrollY are there because the location changes based on the viewport
+
+	// first line gives us the x coordinate of the svg element
 	var xPosition = document.getElementById("svgLine").getBoundingClientRect().left +
+					// then we account for the window scrolling, because the location changes 
+					// based on the viewport, add the x coordinate of the point 
+					// in the svg and the margin
 					window.scrollX + cx + margin.left;
 
 	var yPosition = document.getElementById("svgLine").getBoundingClientRect().top + 
 					window.scrollY + cy + margin.top;
 
-	// rounding to 1 decimal place to dispaly alc. consumption
+	// Rounds to 1 decimal place, displays alc. consumption out of 5
 	var tooltipText = (Math.round(d * 100) / 100) + " / 5";
 
 	var tooltip = d3.select("#tooltip");
 
 	//Update the tooltip position and value
-	d3.select("#tooltip").style("left", xPosition + "px")
+	tooltip.style("left", xPosition + "px")
 			.style("top", yPosition + "px")						
 			.select("#value")
 			.text(tooltipText);
@@ -165,14 +168,14 @@ function toggleLines() {
 			if(showingParents) hideParents();
 			showingParents = false;
 			break;
-		// show weekly average line and Dalc and Walc lines
+		// show only weekly average line and Dalc and Walc lines
 		case "radioDalcWalc":
 			showDalcAndWalc();
 			showingDalcAndWalc = true;
 			if(showingParents) hideParents();
 			showingParents = false;
 			break;
-		// show weekly average line and the parent lines
+		// show only weekly average line and the parent lines
 		case "radioParents":
 			if(showingDalcAndWalc) hideDalcAndWalc();
 			showingDalcAndWalc = false;
@@ -185,13 +188,12 @@ function toggleLines() {
 // show the Dalc and Walc lines
 function showDalcAndWalc() {
 
-	// calculate the average workday and weekend alcohol consumption 
-	// arrays for each age
+	// calculate the average workday and weekend alcohol  
+	// consumption arrays for each age
 	var avgDalcConsumption = calculateAvgOf("Dalc"),
 		avgWalcConsumption = calculateAvgOf("Walc");
 
-	// we give "dalcWalcLabel" to both lines because it will be assigned as
-	// as class to each of them so that we can remove them together
+	// we give "dalcWalcLabel" to both lines so that we can remove them together
 	showLine(avgDalcConsumption, "avgDalcLine");
   	addPointsToLine(avgDalcConsumption, "dalcWalc");			
   	addLabelToLine(avgDalcConsumption, "Workday Average", "dalcWalcLabel");
@@ -202,14 +204,18 @@ function showDalcAndWalc() {
 }
 
 function hideDalcAndWalc() {
+	// remove labels
 	svgLine.selectAll(".dalcWalcLabel")
 			.transition()
 			.remove();
 
+	// remove points
 	svgLine.selectAll(".dalcWalcLinePoint")
 			.transition()
 			.remove();
 
+	// transition dalc and walc lines to location of average lines, for  
+	// visual style, and then remove them.
 	svgLine.select("#avgDalcLine")
 			.transition()
 			.duration(1000)
@@ -222,12 +228,19 @@ function hideDalcAndWalc() {
 			.remove();
 }
 
+//Show the lines based on parental situation
 function showParents () {
 
 	var avgParentsTogetherAlcConsumption  = calculateParentsTogetherAvg();
+
+	// we have to access these arrays in hideParents() because of how we compensate 
+	// with not having data points for every age, so we made them gloabl variables. 
+	// See hideParents() to clarify
 	avgParentsSepMotherAlcConsumption = calculateParentsSepAvg("mother");
 	avgParentsSepFatherAlcConsumption = calculateParentsSepAvg("father");
 
+	// We give the points associated with all three lines the same ID so we can remove
+	// remove them all at once. Same for the labels. 
 	showLine(avgParentsTogetherAlcConsumption, "avgParentsTogetherLine");
   	addPointsToLine(avgParentsTogetherAlcConsumption, "parents");	
   	addLabelToLine(avgParentsTogetherAlcConsumption, "Parents Together", "parentsLabel");
@@ -235,8 +248,9 @@ function showParents () {
   	showLine(avgParentsSepMotherAlcConsumption, "avgParentsSepMotherLine");
   	addPointsToLine(avgParentsSepMotherAlcConsumption, "parents");	
 
-  	// not using function we have for this because we need to make a slight adjustment
-  	// to the position of the label
+  	// We don't use the addLabeltoLine function here. We do this because we have to adjust the
+  	// positition of this label manually or it will be right on top of the other lines
+  	// and therefore unreadable
   	svgLine.append("text")
   		.attr("class", "parentsLabel")
   		.attr("transform", function(d, i) { 
@@ -255,8 +269,7 @@ function showParents () {
 	showLine(avgParentsSepFatherAlcConsumption, "avgParentsSepFatherLine");
   	addPointsToLine(avgParentsSepFatherAlcConsumption, "parents");	
 
-  	// not using function we have for this because we need to make a slight adjustment
-  	// to the position of the label
+  	// Again we have to manually change the label location so we can see it
   	svgLine.append("text")
   		.attr("class", "parentsLabel")
   		.attr("transform", function(d, i) { 
@@ -281,10 +294,16 @@ function hideParents () {
 			.transition()
 			.remove();
 
+	// For separated parents with mother guardians, we have no data
+	// points for age 20. Father guardians have none for 19 or 20. This poses
+	// a problem for the way we have our transition set up, because the weekly 
+	// average line to which we are transitioning will have more data points
+	// than the line we start with. To compensate for this, we create a trimmed
+	// version of the weekly average line based on the length of the separated
+	// parents lines, and transition to that.
 	var sepMotherTrimmedAvgAlcConsumption = [],
 		sepFatherTrimmedAvgAlcConsumption = [];
 
-	
 	for (var i = 0; i < avgParentsSepMotherAlcConsumption.length; i++) {
 		sepMotherTrimmedAvgAlcConsumption.push(avgAlcConsumption[i]);
 	}	
@@ -310,9 +329,12 @@ function hideParents () {
 			.remove();
 }
 
+// lineID will either be "avgDalcLine", "avgParentsTogetherLine", 
+// "avgParentsSepFatherLine", or "avgParentsSepMotherLine"
 function showLine(lineData, lineID) {
 	svgLine.append("path")
 		   .attr("class", "line")
+		   //We give the lines ID's so we can select and remove them
 		   .attr("id", lineID)
 		   .attr("d", avgAlcLine(avgAlcConsumption))
 		   .transition()
@@ -320,8 +342,12 @@ function showLine(lineData, lineID) {
 		   .attr("d", avgAlcLine(lineData));
 }
 
-// linetype should be "weekly", "dalcWalc" or "parents"
+// linetype will be "weekly", "dalcWalc" or "parents". 
 function addPointsToLine(lineData, lineType) {
+	// If the lineType is weekly, than this is the initial visualization that the 
+	// graph starts with. In this case, we want the dots to appear immediately so
+	// we set the delay equal to 0. Otherwise, since the transition takes 1000, we
+	// want the delay for the dots to be 1000 too
 	var delay = (lineType == "weekly") ? 0 : 1000;
 	lineType += "LinePoint";
 	svgLine.selectAll("linePoint")
@@ -338,7 +364,6 @@ function addPointsToLine(lineData, lineType) {
 			   .on("mouseout", function() {
 					//Hide the tooltip
 					d3.select("#tooltip").classed("hidden", true);
-					
 		   		})
 		   	.attr("cx", function(d, i) {
   				return xScale(i + 15);
@@ -352,6 +377,8 @@ function addPointsToLine(lineData, lineType) {
 	  		.attr("visibility", "visible");	
 }
 
+// label is the actual text you see. className will either be "weeklyLabel", 
+// "dalcWalcLabel", or "parentsLabel"
 function addLabelToLine(lineData, label, className) {
 	var delay = (label == "Weekly Average") ? 0 : 1000;
 	svgLine.append("text")
@@ -369,6 +396,7 @@ function addLabelToLine(lineData, label, className) {
 	  		.attr("visibility", "visible");
 }
 
+//Takes the dalc and walc arrays and turns it into an overall weekly average
 function calculateAvgAlcConsumption() {
 
 	var avgDalcArray = calculateAvgOf("Dalc"),
@@ -381,19 +409,26 @@ function calculateAvgAlcConsumption() {
 	return avgAlcConsumption;
 }
 
+// Calculates an array of age based average alcohol consumption based on
+// either "Dalc" or "Walc"
 function calculateAvgOf(attribute) {
 	var total = [],
 		numStudents = [],
 		averages = [];
 
+	// Initialize all array values to 0
 	for (var i = 0; i < 6; i++) {
 		total.push(0);
 		numStudents.push(0);
 	}
 
+	// Looks at every row, take the alcohol consumption for that row
+	// based on the specified attribute.
 	for (var i = 0; i < dataset.length; i++) {
 		var alcConsumption = Number(dataset[i][attribute]);
 
+		// Find age of student in that row, subtract 15 to turn it into an 
+		// index from 0-5
 		 var ageIndex = Number(dataset[i].age) - 15;
 
 		 total[ageIndex] += alcConsumption;
@@ -406,6 +441,8 @@ function calculateAvgOf(attribute) {
 	return averages;
 }
 
+// Calculating the average for parents together is a slightly different
+// process so we create a different function
 function calculateParentsTogetherAvg() {
 	var total = [],
 		numStudents = [],
@@ -417,10 +454,13 @@ function calculateParentsTogetherAvg() {
 	}
 
 	for (var i = 0; i < dataset.length; i++) {
+		//Calculates average weekly consumption for that row
 		var alcConsumption = (Number(dataset[i]["Dalc"]) + Number(dataset[i]["Walc"]))/2;
 
 		 var ageIndex = Number(dataset[i].age) - 15;
 
+		 // Checks if parents are together and only takes alcConsumption into 
+		 // consideration if they are 
 		 if (dataset[i]["Pstatus"] == "T") {
 		 	total[ageIndex] += alcConsumption;
 		 	numStudents[ageIndex]++;
@@ -433,6 +473,7 @@ function calculateParentsTogetherAvg() {
 	return averages;
 }
 
+// Attribute will either be "mother" or "father"
 function calculateParentsSepAvg(attribute) {
 	var total = [],
 		numStudents = [],
@@ -448,6 +489,9 @@ function calculateParentsSepAvg(attribute) {
 
 		 var ageIndex = Number(dataset[i].age) - 15;
 
+		 // Here we first check if the parents are separated. If they are separated,
+		 // then we take alcConsumption into consideration for our average if their 
+		 // guardian matches the attribute we're looking for
 		 if (dataset[i]["Pstatus"] == "A") {
 		 	if (dataset[i]["guardian"] == attribute) {
 		 		total[ageIndex] += alcConsumption;
