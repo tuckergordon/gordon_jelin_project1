@@ -3,6 +3,8 @@
 // lineVis.js
 // Includes all of the D3 script for creating the line graph visualization
 
+// Adopted some of the line graph code from https://bl.ocks.org/mbostock/3883245
+
 var dataset = [],
 	svgLine,		// the svg element
 	margin,

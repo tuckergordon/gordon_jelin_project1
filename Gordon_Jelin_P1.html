@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- James Jelin & Tucker Gordon -->
+<!-- Data Visualization Project 1 -->
+<!-- Tree Visualization HTML -->
+<!-- Validated by https://validator.w3.org/ -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Project 1</title>
+        <script type="text/javascript" src="js/treeData.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body style="text-align: left">
+    	<div class="headerContainer">
+			<h1>
+				Project 1:
+			</h1>
+			<h3>
+				James Jelin and Tucker Gordon
+			</h3>
+			<h3>
+				Bowdoin College, 3 November 2016
+			</h3>
+		</div>
+		<div class="thinBar"></div>
+        <script type="text/javascript" src="js/treeVis.js"></script>
+        <h3>We have two visualizations:</h3>
+        <ol>
+            <li><a href="http://www.bowdoin.edu/~tgordon/data_vis/projects/project1/treeVis.html">Tree Visualization</a></li>
+            <li><a href="http://www.bowdoin.edu/~tgordon/data_vis/projects/project1/lineVis.html">Line Visualization</a></li>
+        </ol>
+        <div class="thinBar"></div>
+        <h3>
+        The Dataset: 
+        </h3>
+        <p>
+            Link: <a href="http://archive.ics.uci.edu/ml/datasets/STUDENT+ALCOHOL+CONSUMPTION">
+                    http://archive.ics.uci.edu/ml/datasets/STUDENT+ALCOHOL+CONSUMPTION
+                    </a>
+            <br><br>
+            Our dataset is the Student Alcohol Consumption dataset from UCI. There are actually two datasets here: one for a math class and one for a Portuguese language class. We are using the Portuguese language class dataset because it is much bigger than the other. This dataset has 648 examples and 33 attributes. Of these, 13 are binary, 14 are numeric, and 6 are categorical.
+            <br><br>
+            The attributes that we will be working with are:
+            <ol>
+                <li>age - student's age (numeric): 15-22</li>
+                <li>Sex - student's sex (binary): 'F' - female or 'M' - male</li>
+                <li>famsize - family size (binary): 'LE3' - <= 3 or 'GT3' > 3</li>
+                <li>Pstatus - parent's cohabitation status (binary): 'T' - together or 'A' - apart</li>
+                <li>guardian - student's primary guardian (categorical): 'mother' or 'father' or 'other'</li>
+                <li>activities - extra-curricular activities (binary): 'yes' or 'no'</li>
+                <li>Dalc - workday alcohol consumption (numeric): 1 - very low to 5 - very high</li>
+                <li>Walc - weekend alcohol consumption (numeric): 1 - very low to 5 - very high</li>
+            </ol>
+            <br>
+            So our data looks like this:<br><br>
+            <table border="1">
+            <tr>
+                <td>sex</td>
+                <td>age</td>
+                <td> famsize </td>
+                <td>Pstatus</td>
+                <td>guardian</td>
+                <td> activities </td>
+                <td>Dalc</td>
+                <td>Walc</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>18</td>
+                <td> GT3 </td>
+                <td>A</td>
+                <td>mother</td>
+                <td> no </td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>17</td>
+                <td> GT3 </td>
+                <td>T</td>
+                <td>father</td>
+                <td> no </td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>15</td>
+                <td> LE3 </td>
+                <td>T</td>
+                <td>mother</td>
+                <td> no </td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>15</td>
+                <td> GT3 </td>
+                <td>T</td>
+                <td>mother</td>
+                <td> yes </td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            </table>
+        </p>
+        <h3>Questions We Can Answer Through Our Interactions</h3>
+        <ol>
+            <li>At what ages do students drink more?</li>
+            <li>Do students whose parents are divorced drink more than students with married parents?</li>
+            <li>Do students with a male single parent drink more than those with a female single parent (or vice-versa)?</li>
+            <li>For each of the above questions, how do these drinking amounts change during the week vs. the weekend?</li>
+            <li>How much does a particular group of students drink, based on the following criteria: sex, age, family size, and extra-curricular involvement (i.e. male, 17, 6 person family, does extracurriculars)?</li>
+        </ol>
+    </body>
+</html>
